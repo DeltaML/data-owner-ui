@@ -8,11 +8,8 @@ cache:
   directories:
   - node_modules
 
-before_script:
- - export NODE_OPTIONS=–max_old_space_size=8192
-
 script:
-  - npm run build
+  - npm run build --max_old_space_size=8192
 
 notifications:
   email:
