@@ -52,13 +52,11 @@ const App = () => (
       <Switch>
         <Route exact path="/" render={() => <Redirect to="/app/home" />} />
         <Route exact path="/app" render={() => <Redirect to="/app/home" />} />
-        <Route exact path="/app/newModel" render={() => <Redirect to="/newModel" />} />
-        <Route exact path="/app/model" render={() => <Redirect to="/model" />} />
-        <Route exact path="/app/dataset" render={() => <Redirect to="/app/dataset" />} />
+        <Route exact path="/app/datasets" render={() => <Redirect to="/app/datasets" />} />
+        <Route exact path="/app/upload-dataset" render={() => <Redirect to="/app/upload-dataset" />} />
         <PrivateRoute path="/app" component={Layout} />
-        <PrivateRoute path="/newModel" component={Layout} />
-        <PrivateRoute path="/app/dataset" component={Layout} />
-        <PrivateRoute path="/model" component={Layout} />
+        <PrivateRoute path="/app/upload-dataset" component={Layout} />
+        <PrivateRoute path="/app/datasets" component={Layout} />
         <PublicRoute path="/login" component={Login} />
         <Route component={Error} />
       </Switch>

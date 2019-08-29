@@ -4,17 +4,17 @@ import HomeWidget from "../../components/HomeWidget";
 import PageTitle from "../../components/PageTitle";
 import {Typography} from "../../components/Wrappers";
 
-const Home = ({classes, theme, ...props}) => {
+const Datasets = ({classes, theme, ...props}) => {
 
     return (
 
         <React.Fragment>
-            <PageTitle title="Home" />
+            <PageTitle title="Datasets" button="Upload Dataset" buttonTo="/app/dataset"/>
             <Grid container spacing={32}>
                 {props.isLoading ? (
                     <CircularProgress size={26}/>
                 ) : (
-                    props.notifications.map(dataset => (
+                    props.datasets.map(dataset => (
                             <Grid item lg={3} md={4} sm={6} xs={12}>
                                 <HomeWidget
                                     title={dataset.filename}
@@ -168,4 +168,4 @@ const styles = theme => ({
     }
 });
 
-export default withStyles(styles, {withTheme: true})(Home);
+export default withStyles(styles, {withTheme: true})(Datasets);

@@ -8,7 +8,7 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 import {Typography} from "../../components/Wrappers";
 
-const Dataset = ({classes, theme, ...props}) => {
+const UploadDataset = ({classes, theme, ...props}) => {
 
     return (
 
@@ -227,4 +227,4 @@ const styles = theme => ({
     },
 });
 
-export default withStyles(styles, {withTheme: true})(Dataset);
+export default withStyles(styles, {withTheme: true})(UploadDataset);

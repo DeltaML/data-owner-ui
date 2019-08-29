@@ -9,7 +9,7 @@ export default compose(
     connect(
         state => ({
             isLoading: state.home.isLoading,
-            datasets: state.home.datasets,
+            notifications: state.home.notifications,
             error: state.home.error
         }),
         {fetchingHomeData}

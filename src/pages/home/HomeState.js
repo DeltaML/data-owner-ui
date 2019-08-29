@@ -3,7 +3,7 @@ import {get} from "../../utils/ApiUtilities";
 export const initialState = {
     isLoading: false,
     error: null,
-    datasets: []
+    notifications: []
 };
 
 
@@ -28,7 +28,7 @@ export const fetchingHomeDataError = (error) => ({
 
 export const fetchingHomeData = (props) => async dispatch => {
 
-    dispatch(fetchingHomeDataPending());
+    /*dispatch(fetchingHomeDataPending());
 
     try {
         const datasets = await get("datasets");
@@ -37,7 +37,7 @@ export const fetchingHomeData = (props) => async dispatch => {
         props.history.push(`/login`)
         dispatch(fetchingHomeDataError(e));
 
-    }
+    }*/
 };
 
 
@@ -48,21 +48,21 @@ export default function HomeReducer(state = initialState, action) {
                 ...state,
                 isLoading: true,
                 error: null,
-                datasets: action.payload
+                notifications: action.payload
             };
         case FETCHING_HOME_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
                 error: null,
-                datasets: action.payload
+                notifications: action.payload
             };
         case FETCHING_HOME_ERROR:
             return {
                 ...state,
                 isLoading: false,
                 error: action.error,
-                models:[]
+                notifications:[]
             };
         default:
             return state;

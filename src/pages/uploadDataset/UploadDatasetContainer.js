@@ -1,16 +1,17 @@
 import {compose, withHandlers} from "recompose";
 import {withRouter} from "react-router-dom";
-import DatasetView from "./Dataset";
+import UploadDatasetView from "./UploadDataset";
 import {connect} from "react-redux";
-import {uploadFile, saveDataSet} from "../dataset/DatasetState";
+import {uploadFile, saveDataSet} from "../uploadDataset/UploadDatasetState";
+import uploadDataset from "./UploadDatasetState";
 
 
 
 export default compose(
     connect(
         state => ({
-            error: state.dataset.error,
-            file: state.dataset.file
+            error: state.uploadDataset.error,
+            file: state.uploadDataset.file
         }),
         {saveDataSet, uploadFile}
     ),
@@ -25,4 +26,4 @@ export default compose(
         }
     })
 
-)(DatasetView);
+)(UploadDatasetView);
