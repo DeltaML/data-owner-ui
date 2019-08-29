@@ -9,23 +9,23 @@ const Home = ({classes, theme, ...props}) => {
     return (
 
         <React.Fragment>
-            <PageTitle title="Home" button="New Model" buttonTo="/app/newModel"/>
+            <PageTitle title="Home" button="Upload Dataset" buttonTo="/app/dataset"/>
             <Grid container spacing={32}>
                 {props.isLoading ? (
                     <CircularProgress size={26}/>
                 ) : (
-                    props.models.map(model => (
+                    props.datasets.map(dataset => (
                             <Grid item lg={3} md={4} sm={6} xs={12}>
                                 <HomeWidget
-                                    title={model.name}
+                                    title={dataset.filename}
                                     upperTitle
                                     bodyClass={classes.fullHeightBody}
                                     className={classes.card}
-                                    link={model.id}
+                                    link={dataset.id}
                                 >
                                     <div className={classes.visitsNumberContainer}>
                                         <Typography size="xl" weight="medium">
-                                            {model.status}
+                                            {dataset.external_id}
                                         </Typography>
                                     </div>
 
@@ -36,17 +36,10 @@ const Home = ({classes, theme, ...props}) => {
                                         alignItems="center"
                                     >
                                         <Grid item>
-                                            <Typography color="textSecondary">Improvement</Typography>
-                                            <Typography size="md">{model.improvement}%</Typography>
+                                            <Typography color="textSecondary">Features</Typography>
+                                            <Typography size="md">{dataset.features}</Typography>
                                         </Grid>
-                                        <Grid item>
-                                            <Typography color="textSecondary">Iterations</Typography>
-                                            <Typography size="md">{model.iterations}</Typography>
-                                        </Grid>
-                                        <Grid item>
-                                            <Typography color="textSecondary">Cost</Typography>
-                                            <Typography size="md">${model.cost}</Typography>
-                                        </Grid>
+
 
                                     </Grid>
                                 </HomeWidget>
