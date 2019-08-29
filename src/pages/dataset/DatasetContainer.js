@@ -10,20 +10,19 @@ export default compose(
     connect(
         state => ({
             error: state.dataset.error,
-            file: state.dataset.file,
-            fileName: state.dataset.fileName,
+            file: state.dataset.file
         }),
         {saveDataSet, uploadFile}
     ),
     withRouter,
     withHandlers({
 
-        handleSaveDataSet: props => (event) => {
+        handleSaveDataSet: props => () => {
             props.saveDataSet(props)
         },
         handleUploadFile: props => (event) => {
             props.uploadFile(event.target.files)
         }
-    }),
+    })
 
 )(DatasetView);

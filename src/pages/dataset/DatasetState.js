@@ -1,13 +1,17 @@
-import dataRequirements from "./mock"
-import payment_requirements from "./mock"
-import {post} from "../../utils/ApiUtilities";
+import {executeRequest} from "../../utils/ApiUtilities";
 
 export const initialState = {
     isLoading: false,
     error: null,
     finished: false,
-    fileName: null,
-    file: null
+    file: {
+        filename: null,
+        type: null,
+        size: null,
+        id: null,
+        ipfsHash: null,
+        link: null,
+    }
 };
 
 
@@ -29,8 +33,9 @@ export const addDataSetPending = () => ({
     type: ADD_DATASET_PENDING
 });
 
-export const addDataSetSuccess = (file) => ({
-    type: ADD_DATASET_SUCCESS
+export const addDataSetSuccess = (response) => ({
+    type: ADD_DATASET_SUCCESS,
+    payload: response
 });
 
 export const addDataSetError = (error) => ({
@@ -43,34 +48,35 @@ export const updateFile = (file) => ({
     payload: file
 });
 
-export const updateFileName = (fileName) => ({
-    type: LOAD_FILE_NAME,
-    payload: fileName
-});
 
 
 export const uploadFile = (files) => dispatch => {
     let file = files[0];
     if (file) {
         console.log(file)
-        dispatch(updateFileName(file.name))
         dispatch(updateFile(file))
     }
 }
 
+const buildUploadDatasetData = (file) => {
+    let data = new FormData()
+    data.append('file', file)
+    return data;
+};
+
 export const saveDataSet = (props) => async dispatch => {
     console.log("Create Model");
-    /*try {
-        const data = buildModelFormData(name, selectedModelType, features, target, payment_requirements);
+    console.log(props.file);
+    dispatch(addDataSetPending());
+    try {
+        const data = buildUploadDatasetData(props.file);
         console.log(data);
-        const modelCreateResponse = await post("models", data);
-        props.history.push(`/app/model/${modelCreateResponse.model.id}`)
+        const uploadDatasetResponse = await executeRequest("POST", "datasets", data);
+        dispatch(addDataSetSuccess(uploadDatasetResponse));
 
     } catch (e) {
-        dispatch(createModelError());
+        dispatch(addDataSetError(e));
     }
-*/
-
 };
 
 
@@ -82,11 +88,7 @@ export default function DatasetReducer(state = initialState, action) {
                 ...state,
                 file: action.payload
             };
-        case LOAD_FILE_NAME:
-            return {
-                ...state,
-                fileName: action.payload
-            };
+
         case ADD_DATASET_PENDING:
             return {
                 ...state,

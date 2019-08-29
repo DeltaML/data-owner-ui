@@ -28,7 +28,7 @@ const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
           <div className={classes.fakeToolbar} />
           <Switch>
             <Route path="/app/home" component={Home} />
-            <Route path="/app/addDataset" component={Dataset} />
+            <Route path="/app/dataset" component={Dataset} />
             <Route path="/app/model" component={Model} />
             <Route path="/app/typography" component={Typography} />
             <Route path="/app/tables" component={Tables} />

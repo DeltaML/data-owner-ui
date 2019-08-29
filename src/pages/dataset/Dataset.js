@@ -1,9 +1,9 @@
 import React from "react";
-import {FormControl, Grid, Button, InputLabel, MenuItem, Select, withStyles} from "@material-ui/core";
+import {Button, FormControl, Grid, withStyles} from "@material-ui/core";
 import Fab from '@material-ui/core/Fab';
 import ModelWidget from "../../components/ModelWidget";
 import PageTitle from "../../components/PageTitle";
-import AddIcon from '@material-ui/icons/Add';
+import SaveIcon from '@material-ui/icons/Save';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 import {Typography} from "../../components/Wrappers";
@@ -18,7 +18,7 @@ const Dataset = ({classes, theme, ...props}) => {
                 <Grid item lg={3} md={4} sm={6} xs={12}>
                     <ModelWidget
                         upperTitle
-                        title="Upload "
+                        title="Select File"
                         bodyClass={classes.fullHeightBody}
                         className={classes.card}
                     >
@@ -30,7 +30,6 @@ const Dataset = ({classes, theme, ...props}) => {
                         >
                             <Grid item>
                                 <FormControl className={classes.formControl}>
-                                    <InputLabel htmlFor="load-file">Select Dataset</InputLabel>
                                     <input
                                         accept="*/*"
                                         className={classes.input}
@@ -46,22 +45,45 @@ const Dataset = ({classes, theme, ...props}) => {
                                             <CloudUploadIcon className={classes.rightIcon}/>
                                         </Button>
                                     </label>
-
                                 </FormControl>
-                                <div>
-                                    <Typography size="m" weight="medium"> {props.fileName}</Typography>
-
-                                </div>
-
 
                             </Grid>
+
+                        </Grid>
+                    </ModelWidget>
+                </Grid>
+                <Grid item lg={3} md={4} sm={6} xs={12}>
+                    <ModelWidget
+                        title="File Details"
+                        upperTitle
+                        bodyClass={classes.fullHeightBody}
+                        className={classes.card}
+                    >
+
+
+                        <Grid
+                            container
+                            direction="row"
+                            justify="space-between"
+                            alignItems="center"
+                        >
+                            <Grid item>
+                                <Typography size="m" weight="medium">Name: {props.file.name}</Typography>
+                                <Typography size="m" weight="medium">Type: {props.file.type}</Typography>
+                                <Typography size="m" weight="medium">Size: {props.file.size}</Typography>
+                                <Typography size="m" weight="medium">ID: {props.file.id}</Typography>
+                                <Typography size="m" weight="medium">IPFS Hash: {props.file.ipfsHash}</Typography>
+                                <Typography size="m" weight="medium">Link: {props.file.link}</Typography>
+                            </Grid>
+
+
                         </Grid>
                     </ModelWidget>
                 </Grid>
 
                 <div>
                     <Fab color="primary" aria-label="Add" className={classes.fab} onClick={props.handleSaveDataSet}>
-                        <AddIcon/>
+                        <SaveIcon/>
                     </Fab>
                 </div>
 
@@ -201,7 +223,7 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
     },
     selectEmpty: {
-      marginTop: theme.spacing.unit * 2,
+        marginTop: theme.spacing.unit * 2,
     },
 });
 

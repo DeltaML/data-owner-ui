@@ -53,9 +53,11 @@ const App = () => (
         <Route exact path="/" render={() => <Redirect to="/app/home" />} />
         <Route exact path="/app" render={() => <Redirect to="/app/home" />} />
         <Route exact path="/app/newModel" render={() => <Redirect to="/newModel" />} />
-          <Route exact path="/app/model" render={() => <Redirect to="/model" />} />
+        <Route exact path="/app/model" render={() => <Redirect to="/model" />} />
+        <Route exact path="/app/dataset" render={() => <Redirect to="/app/dataset" />} />
         <PrivateRoute path="/app" component={Layout} />
         <PrivateRoute path="/newModel" component={Layout} />
+        <PrivateRoute path="/app/dataset" component={Layout} />
         <PrivateRoute path="/model" component={Layout} />
         <PublicRoute path="/login" component={Login} />
         <Route component={Error} />
