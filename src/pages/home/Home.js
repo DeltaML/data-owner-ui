@@ -1,5 +1,5 @@
 import React from "react";
-import {Grid, withStyles,CircularProgress,} from "@material-ui/core";
+import {CircularProgress, Grid, withStyles,} from "@material-ui/core";
 import HomeWidget from "../../components/HomeWidget";
 import PageTitle from "../../components/PageTitle";
 import {Typography} from "../../components/Wrappers";
@@ -9,7 +9,7 @@ const Home = ({classes, theme, ...props}) => {
     return (
 
         <React.Fragment>
-            <PageTitle title="Home" />
+            <PageTitle title="Home"/>
             <Grid container spacing={32}>
                 {props.isLoading ? (
                     <CircularProgress size={26}/>

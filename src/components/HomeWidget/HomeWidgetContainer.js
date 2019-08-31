@@ -1,7 +1,8 @@
 import {compose, withHandlers, withState} from 'recompose';
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {del} from "../../utils/ApiUtilities";
 import HomeWidgetView from './HomeWidgetView';
+
 export default compose(
     withState('moreButtonRef', 'setMoreButtonRef', null),
     withState('isMoreMenuOpen', 'setMoreMenuOpen', false),

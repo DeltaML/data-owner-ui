@@ -62,7 +62,7 @@ export default function DatasetsReducer(state = initialState, action) {
                 ...state,
                 isLoading: false,
                 error: action.error,
-                datasets:[]
+                datasets: []
             };
         default:
             return state;

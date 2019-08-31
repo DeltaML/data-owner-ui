@@ -23,8 +23,7 @@ export const ADD_DATASET_SUCCESS = "Dataset/ADD_DATASET_SUCCESS";
 export const ADD_DATASET_ERROR = "Dataset/ADD_DATASET_ERROR";
 
 
-
-export const selectDataSet= () => ({
+export const selectDataSet = () => ({
     type: SELECT_DATA_SET
 });
 
@@ -47,7 +46,6 @@ export const updateFile = (file) => ({
     type: LOAD_FILE,
     payload: file
 });
-
 
 
 export const uploadFile = (files) => dispatch => {
@@ -78,7 +76,6 @@ export const saveDataSet = (props) => async dispatch => {
         dispatch(addDataSetError(e));
     }
 };
-
 
 
 export default function DatasetReducer(state = initialState, action) {

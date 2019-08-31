@@ -2,9 +2,7 @@ import {compose, withHandlers} from "recompose";
 import {withRouter} from "react-router-dom";
 import UploadDatasetView from "./UploadDataset";
 import {connect} from "react-redux";
-import {uploadFile, saveDataSet} from "../uploadDataset/UploadDatasetState";
-import uploadDataset from "./UploadDatasetState";
-
+import {saveDataSet, uploadFile} from "../uploadDataset/UploadDatasetState";
 
 
 export default compose(
@@ -25,5 +23,4 @@ export default compose(
             props.uploadFile(event.target.files)
         }
     })
-
 )(UploadDatasetView);

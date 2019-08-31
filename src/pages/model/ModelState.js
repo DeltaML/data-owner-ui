@@ -89,13 +89,15 @@ export default function ModelReducer(state = initialState, action) {
                 ...state,
                 model: action.payload
             }
-        };
+        }
+            ;
         case FETCHING_MODEL_METRICS: {
             return {
                 ...state,
                 metrics: action.payload
             }
-        };
+        }
+            ;
         case FETCHING_MODEL_CHART_DATA: {
             return {
                 ...state,
@@ -107,13 +109,15 @@ export default function ModelReducer(state = initialState, action) {
 
             }
 
-        };
+        }
+            ;
         case FETCHING_MODEL_ERROR: {
             return {
                 ...state,
                 error: true
             }
-        };
+        }
+            ;
         default:
             return state;
     }

@@ -2,8 +2,7 @@ import {compose, withHandlers} from "recompose";
 import {withRouter} from "react-router-dom";
 import NewModelView from "./NewModel";
 import {connect} from "react-redux";
-import {createModel, selectModelType,setInputValues, uploadFile} from "../newModel/NewModelState";
-
+import {createModel, selectModelType, setInputValues, uploadFile} from "../newModel/NewModelState";
 
 
 export default compose(
@@ -37,5 +36,4 @@ export default compose(
             props.uploadFile(event.target.files)
         }
     }),
-
 )(NewModelView);

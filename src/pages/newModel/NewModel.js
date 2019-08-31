@@ -308,7 +308,7 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
     },
     selectEmpty: {
-      marginTop: theme.spacing.unit * 2,
+        marginTop: theme.spacing.unit * 2,
     },
 });
 

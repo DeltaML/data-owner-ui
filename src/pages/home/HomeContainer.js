@@ -1,4 +1,4 @@
-import {compose, lifecycle, withHandlers, withState} from "recompose";
+import {compose, lifecycle, withState} from "recompose";
 
 import HomeView from "./Home";
 import {connect} from "react-redux";
@@ -16,9 +16,9 @@ export default compose(
     ),
     withState("mainChartState", "setMainChartState", "monthly"),
 
-  lifecycle({
-    componentWillMount() {
-      this.props.fetchingHomeData(this.props)
-    }
-  }),
+    lifecycle({
+        componentWillMount() {
+            this.props.fetchingHomeData(this.props)
+        }
+    }),
 )(HomeView);

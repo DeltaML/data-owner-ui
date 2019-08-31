@@ -1,5 +1,3 @@
-import {get} from "../../utils/ApiUtilities";
-
 export const initialState = {
     isLoading: false,
     error: null,
@@ -62,7 +60,7 @@ export default function HomeReducer(state = initialState, action) {
                 ...state,
                 isLoading: false,
                 error: action.error,
-                notifications:[]
+                notifications: []
             };
         default:
             return state;

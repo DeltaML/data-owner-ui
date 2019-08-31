@@ -1,8 +1,8 @@
-import {serverProtocol, serverDomain, serverPort} from '../config/ServerConfig';
+import {serverDomain, serverPort, serverProtocol} from '../config/ServerConfig';
 
 function ServerException(msg) {
-   this.msg = msg;
-   this.name = "ServerException";
+    this.msg = msg;
+    this.name = "ServerException";
 }
 
 export const executeRequest = async (httpMethod, path, requestData, headers) => {
@@ -12,8 +12,8 @@ export const executeRequest = async (httpMethod, path, requestData, headers) => 
         body: requestData,
     };
     const url = `${serverProtocol}://${serverDomain}:${serverPort}/${path}`;
-    const response =  await fetch(url, settings);
-    if (response.ok){
+    const response = await fetch(url, settings);
+    if (response.ok) {
         return await response.json()
     }
     throw new ServerException(response)
@@ -21,10 +21,10 @@ export const executeRequest = async (httpMethod, path, requestData, headers) => 
 };
 
 const executeJsonRequest = async (httpMethod, path, requestData) => {
-    const headers =  {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        }
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    }
     return await executeRequest(httpMethod, path, JSON.stringify(requestData), headers)
 };
 

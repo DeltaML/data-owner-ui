@@ -4,28 +4,28 @@ import HomeWidget from "../../components/HomeWidget";
 import PageTitle from "../../components/PageTitle";
 import {Typography} from "../../components/Wrappers";
 
-const Datasets = ({classes, theme, ...props}) => {
+const Models = ({classes, theme, ...props}) => {
 
     return (
 
         <React.Fragment>
-            <PageTitle title="Datasets" button="Upload Dataset" buttonTo="/app/dataset"/>
+            <PageTitle title="Models"/>
             <Grid container spacing={32}>
                 {props.isLoading ? (
                     <CircularProgress size={26}/>
                 ) : (
-                    props.datasets.map(dataset => (
+                    props.models.map(model => (
                             <Grid item lg={3} md={4} sm={6} xs={12}>
                                 <HomeWidget
-                                    title={dataset.filename}
+                                    title={model.filename}
                                     upperTitle
                                     bodyClass={classes.fullHeightBody}
                                     className={classes.card}
-                                    link={dataset.id}
+                                    link={model.id}
                                 >
                                     <div className={classes.visitsNumberContainer}>
                                         <Typography size="xl" weight="medium">
-                                            {dataset.external_id}
+                                            {model.external_id}
                                         </Typography>
                                     </div>
 
@@ -37,7 +37,7 @@ const Datasets = ({classes, theme, ...props}) => {
                                     >
                                         <Grid item>
                                             <Typography color="textSecondary">Features</Typography>
-                                            <Typography size="md">{dataset.features}</Typography>
+                                            <Typography size="md">{model.features}</Typography>
                                         </Grid>
 
 
@@ -168,4 +168,4 @@ const styles = theme => ({
     }
 });
 
-export default withStyles(styles, {withTheme: true})(Datasets);
+export default withStyles(styles, {withTheme: true})(Models);
