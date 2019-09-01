@@ -55,10 +55,12 @@ const App = () => (
                 <Route exact path="/app/datasets" render={() => <Redirect to="/app/datasets"/>}/>
                 <Route exact path="/app/upload-dataset" render={() => <Redirect to="/app/upload-dataset"/>}/>
                 <Route exact path="/app/models" render={() => <Redirect to="/app/models"/>}/>
+                <Route exact path="/app/model" render={() => <Redirect to="/app/model"/>}/>
                 <PrivateRoute path="/app" component={Layout}/>
                 <PrivateRoute path="/app/upload-dataset" component={Layout}/>
                 <PrivateRoute path="/app/datasets" component={Layout}/>
                 <PrivateRoute path="/app/models" component={Layout}/>
+                <PrivateRoute path="/app/model" component={Layout}/>
                 <PublicRoute path="/login" component={Login}/>
                 <Route component={Error}/>
             </Switch>

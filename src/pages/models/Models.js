@@ -17,7 +17,7 @@ const Models = ({classes, theme, ...props}) => {
                     props.models.map(model => (
                             <Grid item lg={3} md={4} sm={6} xs={12}>
                                 <HomeWidget
-                                    title={model.filename}
+                                    title={model.name}
                                     upperTitle
                                     bodyClass={classes.fullHeightBody}
                                     className={classes.card}
@@ -25,7 +25,7 @@ const Models = ({classes, theme, ...props}) => {
                                 >
                                     <div className={classes.visitsNumberContainer}>
                                         <Typography size="xl" weight="medium">
-                                            {model.external_id}
+                                            {model.status}
                                         </Typography>
                                     </div>
 
@@ -36,10 +36,17 @@ const Models = ({classes, theme, ...props}) => {
                                         alignItems="center"
                                     >
                                         <Grid item>
-                                            <Typography color="textSecondary">Features</Typography>
-                                            <Typography size="md">{model.features}</Typography>
+                                            <Typography color="textSecondary">Improvement</Typography>
+                                            <Typography size="md">{model.improvement}%</Typography>
                                         </Grid>
-
+                                        <Grid item>
+                                            <Typography color="textSecondary">Iterations</Typography>
+                                            <Typography size="md">{model.iterations}</Typography>
+                                        </Grid>
+                                        <Grid item>
+                                            <Typography color="textSecondary">Cost</Typography>
+                                            <Typography size="md">${model.cost}</Typography>
+                                        </Grid>
 
                                     </Grid>
                                 </HomeWidget>

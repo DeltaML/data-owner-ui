@@ -10,6 +10,7 @@ import Home from '../../pages/home';
 import Datasets from '../../pages/datasets';
 import UploadDataset from '../../pages/uploadDataset';
 import Models from '../../pages/models';
+import Model from '../../pages/model';
 import Typography from '../../pages/typography';
 import Notifications from '../../pages/notifications';
 import Maps from '../../pages/maps';
@@ -31,6 +32,7 @@ const Layout = ({classes, isSidebarOpened, toggleSidebar}) => (
                         <Route path="/app/datasets" component={Datasets}/>
                         <Route path="/app/upload-dataset" component={UploadDataset}/>
                         <Route path="/app/models" component={Models}/>
+                        <Route path="/app/model" component={Model}/>
                         <Route path="/app/typography" component={Typography}/>
                         <Route path="/app/tables" component={Tables}/>
                         <Route path="/app/notifications" component={Notifications}/>

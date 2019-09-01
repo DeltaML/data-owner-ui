@@ -6,6 +6,7 @@ import home from '../pages/home/HomeState';
 import uploadDataset from '../pages/uploadDataset/UploadDatasetState';
 import datasets from '../pages/datasets/DatasetsState';
 import models from '../pages/models/ModelsState';
+import model from '../pages/model/ModelState';
 
 export default combineReducers({
     layout,
@@ -13,5 +14,6 @@ export default combineReducers({
     home,
     datasets,
     uploadDataset,
-    models
+    models,
+    model
 });

@@ -7,7 +7,6 @@ import {Typography} from "../../components/Wrappers";
 import Dot from "../../components/Sidebar/components/Dot";
 import BigStat from "./components/BigStat/BigStat";
 import PageTitle from "../../components/PageTitle";
-import Table from "./components/Table/Table";
 
 const Model = ({classes, theme, ...props}) => {
     return (
@@ -137,16 +136,6 @@ const Model = ({classes, theme, ...props}) => {
                                 />
                             </ComposedChart>
                         </ResponsiveContainer>
-                    </ModelWidget>
-                </Grid>
-                <Grid item xs={12}>
-                    <ModelWidget
-                        title="Partial MSE's"
-                        upperTitle
-                        noBodyPadding
-                        bodyClass={classes.tableWidget}
-                    >
-                        <Table rowsData={props.metrics.partial_MSEs || []}/>
                     </ModelWidget>
                 </Grid>
             </Grid>

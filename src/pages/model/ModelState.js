@@ -75,7 +75,7 @@ export const fetchingModelData = (props) => async dispatch => {
         const modelData = await get(url);
         dispatchModelDataSuccess(dispatch, modelData);
     } catch (e) {
-        props.history.push(`/app/newModel`)
+        props.history.push(`/app/models`)
         dispatch(fetchingModelDataError(e));
 
     }

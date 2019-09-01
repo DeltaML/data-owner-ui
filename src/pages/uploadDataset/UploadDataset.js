@@ -4,7 +4,7 @@ import Fab from '@material-ui/core/Fab';
 import ModelWidget from "../../components/ModelWidget";
 import PageTitle from "../../components/PageTitle";
 import SaveIcon from '@material-ui/icons/Save';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import AttachFileIcon from '@material-ui/icons/AttachFile';
 
 import {Typography} from "../../components/Wrappers";
 
@@ -42,7 +42,7 @@ const UploadDataset = ({classes, theme, ...props}) => {
                                         <Button variant="contained" component="span" className={classes.upLoadButton}
                                         >
                                             Upload
-                                            <CloudUploadIcon className={classes.rightIcon}/>
+                                            <AttachFileIcon className={classes.rightIcon}/>
                                         </Button>
                                     </label>
                                 </FormControl>
@@ -93,8 +93,8 @@ const UploadDataset = ({classes, theme, ...props}) => {
                         >
                             <Grid item>
                                 <Typography size="m" weight="medium">Features: {props.dataDetails.features}</Typography>
-                                <Typography size="m" weight="medium">#Columns: {props.dataDetails.columns}</Typography>
-                                <Typography size="m" weight="medium">#Rows: {props.dataDetails.rows}</Typography>
+                                <Typography size="m" weight="medium">Columns: {props.dataDetails.columns}</Typography>
+                                <Typography size="m" weight="medium">Rows: {props.dataDetails.rows}</Typography>
                             </Grid>
 
 

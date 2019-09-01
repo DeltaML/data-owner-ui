@@ -1,12 +1,13 @@
 import React from 'react';
 import {Drawer, IconButton, List, withStyles} from "@material-ui/core";
-import * as Icons from "@material-ui/icons";
 import {
     ArrowBack as ArrowBackIcon,
-    HelpOutline as FAQIcon,
     Home as HomeIcon,
     LibraryBooks as LibraryIcon,
-    QuestionAnswer as SupportIcon,
+    Attachment as AttachmentIcon,
+    Bookmarks as BookmarksIcon,
+    Bookmark as BookmarkIcon,
+
 } from "@material-ui/icons";
 import classNames from 'classnames';
 
@@ -15,32 +16,9 @@ import SidebarLink from './components/SidebarLink/SidebarLinkContainer';
 const structure = [
     {id: 0, label: 'Home', link: '/app/home', icon: <HomeIcon/>},
     {id: 1, label: 'Datasets', link: '/app/datasets', icon: <LibraryIcon/>},
-    {id: 2, label: 'Upload Dataset', link: '/app/upload-dataset', icon: <SupportIcon/>},
-    {id: 3, label: 'Models', link: '/app/models', icon: <FAQIcon/>},
-    {id: 4, label: 'Settingss', link: '/app/settings', icon: <Icons.SettingsApplications/>},
-    /*{ id: 2, label: 'View Model', link: '/app/model', icon: <Icons.SettingsApplications/> },
-    { id: 3, label: 'Notifications', link: '/app/notifications', icon: <NotificationsIcon />},
-    {
-      id: 4,
-      label: 'UI Elements',
-      link: '/app/ui',
-      icon: <UIElementsIcon />,
-      children: [
-        { label: 'Icons', link: '/app/ui/icons' },
-        { label: 'Charts', link: '/app/ui/charts' },
-        { label: 'Maps', link: '/app/ui/maps' },
-      ],
-    },
-    { id: 5, type: 'divider' },
-    { id: 6, type: 'title', label: 'HELP' },
-    { id: 7, label: 'Library', link: '', icon: <LibraryIcon /> },
-    { id: 8, label: 'Support', link: '', icon: <SupportIcon /> },
-    { id: 9, label: 'FAQ', link: '', icon: <FAQIcon />},
-    { id: 10, type: 'divider' },
-    { id: 11, type: 'title', label: 'PROJECTS' },
-    { id: 12, label: 'My recent', link: '', icon: <Dot size="large" color="warning" /> },
-    { id: 13, label: 'Starred', link: '', icon: <Dot size="large" color="primary" /> },
-    { id: 14, label: 'Background', link: '', icon: <Dot size="large" color="secondary" /> },*/
+    {id: 2, label: 'Upload Dataset', link: '/app/upload-dataset', icon: <AttachmentIcon/>},
+    {id: 3, label: 'Models', link: '/app/models', icon: <BookmarksIcon/>},
+    {id: 4, label: 'Model', link: '/app/model', icon: <BookmarkIcon/>}
 ];
 
 const SidebarView = ({classes, theme, toggleSidebar, isSidebarOpened, isPermanent, location}) => {
