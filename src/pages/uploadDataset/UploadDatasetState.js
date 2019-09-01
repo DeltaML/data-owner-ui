@@ -7,10 +7,15 @@ export const initialState = {
     file: {
         filename: null,
         type: null,
-        size: null,
+        size: null
+    },
+    dataDetails: {
         id: null,
         ipfsHash: null,
         link: null,
+        features: [],
+        columns: null,
+        rows: null
     }
 };
 
@@ -51,7 +56,8 @@ export const updateFile = (file) => ({
 export const uploadFile = (files) => dispatch => {
     let file = files[0];
     if (file) {
-        console.log(file)
+        console.log(file);
+
         dispatch(updateFile(file))
     }
 }
@@ -63,8 +69,7 @@ const buildUploadDatasetData = (file) => {
 };
 
 export const saveDataSet = (props) => async dispatch => {
-    console.log("Create Model");
-    console.log(props.file);
+
     dispatch(addDataSetPending());
     try {
         const data = buildUploadDatasetData(props.file);

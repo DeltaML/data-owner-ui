@@ -9,7 +9,7 @@ const Datasets = ({classes, theme, ...props}) => {
     return (
 
         <React.Fragment>
-            <PageTitle title="Datasets" button="Upload Dataset" buttonTo="/app/dataset"/>
+            <PageTitle title="Datasets" button="Upload Dataset" buttonTo="/app/upload-dataset"/>
             <Grid container spacing={32}>
                 {props.isLoading ? (
                     <CircularProgress size={26}/>

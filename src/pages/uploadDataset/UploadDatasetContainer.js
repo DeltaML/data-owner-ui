@@ -9,7 +9,8 @@ export default compose(
     connect(
         state => ({
             error: state.uploadDataset.error,
-            file: state.uploadDataset.file
+            file: state.uploadDataset.file,
+            dataDetails: state.uploadDataset.dataDetails
         }),
         {saveDataSet, uploadFile}
     ),

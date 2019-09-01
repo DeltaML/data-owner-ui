@@ -7,9 +7,9 @@ export const initialState = {
 };
 
 
-export const FETCHING_MODELS_PENDING = "Datasets/FETCHING_MODELS_PENDING";
-export const FETCHING_MODELS_SUCCESS = "Datasets/FETCHING_MODELS_SUCCESS";
-export const FETCHING_MODELS_ERROR = "Datasets/FETCHING_MODELS_ERROR";
+export const FETCHING_MODELS_PENDING = "Models/FETCHING_MODELS_PENDING";
+export const FETCHING_MODELS_SUCCESS = "Models/FETCHING_MODELS_SUCCESS";
+export const FETCHING_MODELS_ERROR = "Models/FETCHING_MODELS_ERROR";
 
 export const fetchingModelsDataPending = () => ({
     type: FETCHING_MODELS_PENDING

@@ -1,6 +1,6 @@
 import {compose, lifecycle, withState} from "recompose";
 
-import ModelsView from "./Datasets";
+import ModelsView from "./Models";
 import {connect} from "react-redux";
 import {fetchingModelsData} from "../models/ModelsState";
 

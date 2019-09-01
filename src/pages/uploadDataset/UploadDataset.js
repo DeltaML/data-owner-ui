@@ -59,8 +59,6 @@ const UploadDataset = ({classes, theme, ...props}) => {
                         bodyClass={classes.fullHeightBody}
                         className={classes.card}
                     >
-
-
                         <Grid
                             container
                             direction="row"
@@ -71,9 +69,32 @@ const UploadDataset = ({classes, theme, ...props}) => {
                                 <Typography size="m" weight="medium">Name: {props.file.name}</Typography>
                                 <Typography size="m" weight="medium">Type: {props.file.type}</Typography>
                                 <Typography size="m" weight="medium">Size: {props.file.size}</Typography>
-                                <Typography size="m" weight="medium">ID: {props.file.id}</Typography>
-                                <Typography size="m" weight="medium">IPFS Hash: {props.file.ipfsHash}</Typography>
-                                <Typography size="m" weight="medium">Link: {props.file.link}</Typography>
+                                <Typography size="m" weight="medium">ID: {props.dataDetails.id}</Typography>
+                                <Typography size="m" weight="medium">IPFS Hash: {props.dataDetails.ipfsHash}</Typography>
+                                <Typography size="m" weight="medium">Link: {props.dataDetails.link}</Typography>
+                            </Grid>
+
+
+                        </Grid>
+                    </ModelWidget>
+                </Grid>
+                <Grid item lg={3} md={4} sm={6} xs={12}>
+                    <ModelWidget
+                        title="Data set Details"
+                        upperTitle
+                        bodyClass={classes.fullHeightBody}
+                        className={classes.card}
+                    >
+                        <Grid
+                            container
+                            direction="row"
+                            justify="space-between"
+                            alignItems="center"
+                        >
+                            <Grid item>
+                                <Typography size="m" weight="medium">Features: {props.dataDetails.features}</Typography>
+                                <Typography size="m" weight="medium">#Columns: {props.dataDetails.columns}</Typography>
+                                <Typography size="m" weight="medium">#Rows: {props.dataDetails.rows}</Typography>
                             </Grid>
 
 
