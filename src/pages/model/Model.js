@@ -108,7 +108,7 @@ const Model = ({classes, theme, ...props}) => {
                                 <Line
                                     type="natural"
                                     dataKey="initial"
-                                    fill={theme.palette.primary.warning}
+                                    fill={theme.palette.background.light}
                                     strokeWidth={2}
                                     dot={false}
                                     activeDot={false}
