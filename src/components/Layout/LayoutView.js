@@ -1,14 +1,15 @@
 import React from 'react';
-import { withStyles, CssBaseline } from '@material-ui/core';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import {CssBaseline, withStyles} from '@material-ui/core';
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import classnames from 'classnames';
 
 import Header from '../Header';
 import Sidebar from '../Sidebar';
-
 // pages
 import Home from '../../pages/home';
-import NewModel from '../../pages/newModel';
+import Datasets from '../../pages/datasets';
+import UploadDataset from '../../pages/uploadDataset';
+import Models from '../../pages/models';
 import Model from '../../pages/model';
 import Typography from '../../pages/typography';
 import Notifications from '../../pages/notifications';
@@ -17,55 +18,57 @@ import Tables from '../../pages/tables';
 import Icons from '../../pages/icons';
 import Charts from '../../pages/charts';
 
-const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
-  <div className={classes.root}>
-    <CssBaseline />
-    <BrowserRouter>
-      <React.Fragment>
-        <Header />
-        <Sidebar />
-        <div className={classnames(classes.content, { [classes.contentShift]: isSidebarOpened })}>
-          <div className={classes.fakeToolbar} />
-          <Switch>
-            <Route path="/app/home" component={Home} />
-            <Route path="/app/newModel" component={NewModel} />
-            <Route path="/app/model" component={Model} />
-            <Route path="/app/typography" component={Typography} />
-            <Route path="/app/tables" component={Tables} />
-            <Route path="/app/notifications" component={Notifications} />
-            <Route exact path="/app/ui" render={() => <Redirect to="/app/ui/icons" />} />
-            <Route path="/app/ui/maps" component={Maps} />
-            <Route path="/app/ui/icons" component={Icons} />
-            <Route path="/app/ui/charts" component={Charts} />
-          </Switch>
-        </div>
-      </React.Fragment>
-    </BrowserRouter>
-  </div>
+const Layout = ({classes, isSidebarOpened, toggleSidebar}) => (
+    <div className={classes.root}>
+        <CssBaseline/>
+        <BrowserRouter>
+            <React.Fragment>
+                <Header/>
+                <Sidebar/>
+                <div className={classnames(classes.content, {[classes.contentShift]: isSidebarOpened})}>
+                    <div className={classes.fakeToolbar}/>
+                    <Switch>
+                        <Route path="/app/home" component={Home}/>
+                        <Route path="/app/datasets" component={Datasets}/>
+                        <Route path="/app/upload-dataset" component={UploadDataset}/>
+                        <Route path="/app/models" component={Models}/>
+                        <Route path="/app/model" component={Model}/>
+                        <Route path="/app/typography" component={Typography}/>
+                        <Route path="/app/tables" component={Tables}/>
+                        <Route path="/app/notifications" component={Notifications}/>
+                        <Route exact path="/app/ui" render={() => <Redirect to="/app/ui/icons"/>}/>
+                        <Route path="/app/ui/maps" component={Maps}/>
+                        <Route path="/app/ui/icons" component={Icons}/>
+                        <Route path="/app/ui/charts" component={Charts}/>
+                    </Switch>
+                </div>
+            </React.Fragment>
+        </BrowserRouter>
+    </div>
 );
 
 const styles = theme => ({
-  root: {
-    display: 'flex',
-    maxWidth: '100vw',
-    overflowX: 'hidden',
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-    width: `calc(100vw - 240px)`,
-    minHeight: '100vh',
-  },
-  contentShift: {
-    width: `calc(100vw - ${240 + theme.spacing.unit * 6}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  fakeToolbar: {
-    ...theme.mixins.toolbar,
-  }
+    root: {
+        display: 'flex',
+        maxWidth: '100vw',
+        overflowX: 'hidden',
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing.unit * 3,
+        width: `calc(100vw - 240px)`,
+        minHeight: '100vh',
+    },
+    contentShift: {
+        width: `calc(100vw - ${240 + theme.spacing.unit * 6}px)`,
+        transition: theme.transitions.create(['width', 'margin'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+    },
+    fakeToolbar: {
+        ...theme.mixins.toolbar,
+    }
 });
 
 export default withStyles(styles)(Layout);

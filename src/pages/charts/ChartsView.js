@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
+import {Grid, withTheme} from '@material-ui/core';
 
 import Widget from '../../components/Widget';
 import ApexLineChart from './components/ApexLineChart';
@@ -11,12 +11,12 @@ import {
     LineChart,
     Pie,
     PieChart,
-    ResponsiveContainer, Sector,
+    ResponsiveContainer,
+    Sector,
     Tooltip,
     XAxis,
     YAxis
 } from "recharts";
-import {withTheme} from "@material-ui/core";
 import PageTitle from "../../components/PageTitle";
 
 const lineChartData = [
@@ -44,10 +44,10 @@ const lineChartData = [
 ];
 
 const pieChartData = [
-    { name: 'Group A', value: 400 },
-    { name: 'Group B', value: 300 },
-    { name: 'Group C', value: 300 },
-    { name: 'Group D', value: 200 },
+    {name: 'Group A', value: 400},
+    {name: 'Group B', value: 300},
+    {name: 'Group C', value: 300},
+    {name: 'Group D', value: 200},
 ];
 
 const renderActiveShape = (props) => {
@@ -87,8 +87,8 @@ const renderActiveShape = (props) => {
                 outerRadius={outerRadius + 10}
                 fill={fill}
             />
-            <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
-            <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
+            <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none"/>
+            <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none"/>
             <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`PV ${value}`}</text>
             <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
                 {`(Rate ${(percent * 100).toFixed(2)}%)`}
@@ -99,61 +99,62 @@ const renderActiveShape = (props) => {
 
 const ChartsView = (props) => (
     <React.Fragment>
-      <PageTitle title="Charts Page - Data Display" button="Latest Reports" />
-      <Grid container spacing={32}>
-        <Grid item xs={12} md={6}>
-          <Widget title="Apex Line Chart" upperTitle noBodyPadding>
-            <ApexLineChart />
-          </Widget>
+        <PageTitle title="Charts Page - Data Display" button="Latest Reports"/>
+        <Grid container spacing={32}>
+            <Grid item xs={12} md={6}>
+                <Widget title="Apex Line Chart" upperTitle noBodyPadding>
+                    <ApexLineChart/>
+                </Widget>
+            </Grid>
+            <Grid item xs={12} md={6}>
+                <Widget title="Apex Heatmap" upperTitle noBodyPadding>
+                    <ApexHeatmap/>
+                </Widget>
+            </Grid>
+            <Grid item xs={12} md={8}>
+                <Widget title="Simple Line Chart" noBodyPadding upperTitle>
+                    <ResponsiveContainer width="100%" height={350}>
+                        <LineChart
+                            width={500}
+                            height={300}
+                            data={lineChartData}
+                            margin={{
+                                top: 5, right: 30, left: 20, bottom: 5,
+                            }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3"/>
+                            <XAxis dataKey="name"/>
+                            <YAxis/>
+                            <Tooltip/>
+                            <Legend/>
+                            <Line type="monotone" dataKey="pv" stroke={props.theme.palette.primary.main}
+                                  activeDot={{r: 8}}/>
+                            <Line type="monotone" dataKey="uv" stroke={props.theme.palette.secondary.main}/>
+                        </LineChart>
+                    </ResponsiveContainer>
+                </Widget>
+            </Grid>
+            <Grid item xs={12} md={4}>
+                <Widget title="Pie Chart with Tooltips" noBodyPadding upperTitle>
+                    <ResponsiveContainer width="100%" height={300}>
+                        <PieChart width={200} height={300}>
+                            <Pie
+                                activeIndex={props.activeIndex}
+                                activeShape={renderActiveShape}
+                                data={pieChartData}
+                                cx={200}
+                                cy={150}
+                                innerRadius={60}
+                                outerRadius={80}
+                                fill={props.theme.palette.primary.main}
+                                dataKey="value"
+                                onMouseEnter={props.changeActiveIndexId}
+                            />
+                        </PieChart>
+                    </ResponsiveContainer>
+                </Widget>
+            </Grid>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <Widget title="Apex Heatmap" upperTitle noBodyPadding>
-            <ApexHeatmap />
-          </Widget>
-        </Grid>
-        <Grid item xs={12} md={8}>
-          <Widget title="Simple Line Chart" noBodyPadding upperTitle>
-              <ResponsiveContainer width="100%" height={350}>
-                  <LineChart
-                      width={500}
-                      height={300}
-                      data={lineChartData}
-                      margin={{
-                          top: 5, right: 30, left: 20, bottom: 5,
-                      }}
-                  >
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="name" />
-                      <YAxis />
-                      <Tooltip />
-                      <Legend />
-                      <Line type="monotone" dataKey="pv" stroke={props.theme.palette.primary.main} activeDot={{ r: 8 }} />
-                      <Line type="monotone" dataKey="uv" stroke={props.theme.palette.secondary.main} />
-                  </LineChart>
-              </ResponsiveContainer>
-          </Widget>
-        </Grid>
-          <Grid item xs={12} md={4}>
-              <Widget title="Pie Chart with Tooltips" noBodyPadding upperTitle>
-                  <ResponsiveContainer width="100%" height={300}>
-                      <PieChart width={200} height={300}>
-                          <Pie
-                              activeIndex={props.activeIndex}
-                              activeShape={renderActiveShape}
-                              data={pieChartData}
-                              cx={200}
-                              cy={150}
-                              innerRadius={60}
-                              outerRadius={80}
-                              fill={props.theme.palette.primary.main}
-                              dataKey="value"
-                              onMouseEnter={props.changeActiveIndexId}
-                          />
-                      </PieChart>
-                  </ResponsiveContainer>
-              </Widget>
-          </Grid>
-      </Grid>
     </React.Fragment>
 );
 

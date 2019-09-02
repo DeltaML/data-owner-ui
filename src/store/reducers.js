@@ -1,15 +1,19 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 
 import layout from '../components/Layout/LayoutState';
 import login from '../pages/login/LoginState';
 import home from '../pages/home/HomeState';
-import newModel from '../pages/newModel/NewModelState';
+import uploadDataset from '../pages/uploadDataset/UploadDatasetState';
+import datasets from '../pages/datasets/DatasetsState';
+import models from '../pages/models/ModelsState';
 import model from '../pages/model/ModelState';
 
 export default combineReducers({
-  layout,
-  login,
-  home,
-  newModel,
-  model
+    layout,
+    login,
+    home,
+    datasets,
+    uploadDataset,
+    models,
+    model
 });

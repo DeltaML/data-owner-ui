@@ -1,8 +1,8 @@
 import React from "react";
 import classnames from "classnames";
-import {Menu, MenuItem, Paper, withStyles, IconButton} from "@material-ui/core";
+import {IconButton, Menu, MenuItem, Paper, withStyles} from "@material-ui/core";
 import Typography from "@material-ui/core/es/Typography/Typography";
-import { MoreVert as MoreIcon } from "@material-ui/icons";
+import {MoreVert as MoreIcon} from "@material-ui/icons";
 
 const HomeWidget = ({
                         classes,
@@ -25,18 +25,18 @@ const HomeWidget = ({
                         <Typography variant="headline" color="textSecondary">
                             {title}
                         </Typography>
-                                    {!disableWidgetMenu && (
-              <IconButton
-                color="primary"
-                classes={{ root: classes.moreButton }}
-                aria-owns="widget-menu"
-                aria-haspopup="true"
-                onClick={() => props.setMoreMenuOpen(true)}
-                buttonRef={props.setMoreButtonRef}
-              >
-                <MoreIcon />
-              </IconButton>
-            )}
+                        {!disableWidgetMenu && (
+                            <IconButton
+                                color="primary"
+                                classes={{root: classes.moreButton}}
+                                aria-owns="widget-menu"
+                                aria-haspopup="true"
+                                onClick={() => props.setMoreMenuOpen(true)}
+                                buttonRef={props.setMoreButtonRef}
+                            >
+                                <MoreIcon/>
+                            </IconButton>
+                        )}
                     </React.Fragment>
                 )}
             </div>

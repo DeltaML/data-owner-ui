@@ -37,36 +37,36 @@ const DialogActions = withStyles(theme => ({
 
 
 const ModelDialog = ({classes, ...props}) => {
-      const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
     return (
-    <div className={classes.pageTitleContainer}>
-        <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
-            Show model
-        </Button>
-        <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-            <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                {props.title}
-            </DialogTitle>
-            <DialogContent dividers>
+        <div className={classes.pageTitleContainer}>
+            <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
+                Show model
+            </Button>
+            <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+                <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+                    {props.title}
+                </DialogTitle>
+                <DialogContent dividers>
 
-                    <div><Typography gutterBottom>{JSON.stringify(props.data, null, 2) }</Typography></div>
+                    <div><Typography gutterBottom>{JSON.stringify(props.data, null, 2)}</Typography></div>
 
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={handleClose} color="primary">
-                    CLose
-                </Button>
-            </DialogActions>
-        </Dialog>
-    </div>
-)
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary">
+                        CLose
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </div>
+    )
 };
 
 const styles = theme => ({
@@ -76,8 +76,8 @@ const styles = theme => ({
     },
     closeButton: {
         position: 'absolute',
-        right: theme.spacing.unit ,
-        top: theme.spacing.unit ,
+        right: theme.spacing.unit,
+        top: theme.spacing.unit,
         color: theme.palette.grey[500],
     },
 });
