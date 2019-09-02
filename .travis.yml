@@ -1,6 +1,9 @@
 # Let travis know the language it needs to run
 language: node_js
 
+env:
+  - CI=false
+
 node_js:
   - "stable"
 

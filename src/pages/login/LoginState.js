@@ -2,7 +2,7 @@ import {post} from '../../utils/ApiUtilities';
 
 export const initialState = {
     isLoading: false,
-    isAuthenticated: !!localStorage.getItem("id_token"),
+    isAuthenticated: !!localStorage.getItem("data_owner_id_token"),
     error: null
 };
 
@@ -37,8 +37,8 @@ export const loginUser = (tokenId) => async dispatch => {
     if (tokenId) {
         try {
             const userLoginResponse = await post("users/login", {token: tokenId});
-            localStorage.setItem("id_token", userLoginResponse.token);
-            localStorage.setItem("user_id", userLoginResponse.id);
+            localStorage.setItem("data_owner_id_token", userLoginResponse.token);
+            localStorage.setItem("data_owner_user_id", userLoginResponse.id);
             dispatch(loginSuccess());
         } catch (e) {
             dispatch(loginFailure());
@@ -53,7 +53,7 @@ export const signOutSuccess = () => ({
 });
 
 export const signOut = () => dispatch => {
-    localStorage.removeItem("id_token");
+    localStorage.removeItem("data_owner_id_token");
     dispatch(signOutSuccess());
 };
 
