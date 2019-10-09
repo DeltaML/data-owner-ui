@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-cp -r ../build ../../data-owner/data_owner/static
+mkdir ../../data-owner/node-server/static
+cp -r ../build ../../data-owner/node-server/static
