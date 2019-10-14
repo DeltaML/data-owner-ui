@@ -7,11 +7,18 @@ import {Typography} from "../../components/Wrappers";
 import Dot from "../../components/Sidebar/components/Dot";
 import BigStat from "./components/BigStat/BigStat";
 import PageTitle from "../../components/PageTitle";
+import {acceptModelTraining} from "./ModelState"
 
 const Model = ({classes, theme, ...props}) => {
+    console.log("-------------- STATUS -----------");
+    console.log(props.model.status);
     return (
         <React.Fragment>
-            <PageTitle title={props.model.name} modal="Show Model" modalData={props.model.weights}/>
+            {((props.model.status !== "WAITING") && (props.model.status !== "READY")) ?
+                <PageTitle title={props.model.name} disabled={false} modal="Show Model" modalData={props.model.weights}/>
+                :
+                <PageTitle title="Datasets" onClick={acceptModelTraining} disabled={props.model.status !== "READY"} button="Train model" buttonTo={"/app/model/" + props.model.id} />
+            }
             <Grid container spacing={32}>
                 <Grid item lg={3} md={4} sm={6} xs={12}>
                     <ModelWidget
@@ -35,111 +42,119 @@ const Model = ({classes, theme, ...props}) => {
                     </ModelWidget>
                 </Grid>
 
-                <Grid item md={4} sm={6} xs={12}>
-                    <BigStat mse={props.metrics.mse} improvement={props.metrics.improvement}
-                             initialMse={props.metrics.initial_mse} iterations={props.metrics.iterations}/>
-                </Grid>
+                { ((props.model.status !== "WAITING") && (props.model.status !== "READY")) ?
+                    <Grid item md={4} sm={6} xs={12}>
+                        <BigStat mse={props.metrics.mse} improvement={props.metrics.improvement}
+                                 initialMse={props.metrics.initial_mse} iterations={props.metrics.iterations}/>
+                    </Grid>
+                :
+                    <Grid item md={4} sm={6} xs={12}>
+                        {props.model.requirements}
+                    </Grid>
+                }
 
-
-                <Grid item lg={3} md={4} sm={6} xs={12}>
-                    <ModelWidget
-                        title="Spent Money"
-                        upperTitle
-                        bodyClass={classes.fullHeightBody}
-                        className={classes.card}
-                    >
-                        <div className={classes.visitsNumberContainer}>
-                            <Typography size="xl" weight="medium">
-                                $10/$100
-                            </Typography>
-                        </div>
-                        <Grid
-                            container
-                            direction="row"
-                            justify="space-between"
-                            alignItems="center"
+                { ((props.model.status !== "WAITING") && (props.model.status !== "READY")) ?
+                    <Grid item lg={3} md={4} sm={6} xs={12}>
+                        <ModelWidget
+                            title="Spent Money"
+                            upperTitle
+                            bodyClass={classes.fullHeightBody}
+                            className={classes.card}
                         >
-                        </Grid>
-                    </ModelWidget>
-                </Grid>
-
-                <Grid item xs={12}>
-                    <ModelWidget
-                        bodyClass={classes.mainChartBody}
-                        header={
-                            <div className={classes.mainChartHeader}>
-                                <Typography variant="headline" color="textSecondary">
-                                    MSE Comparatives
+                            <div className={classes.visitsNumberContainer}>
+                                <Typography size="xl" weight="medium">
+                                    $10/$100
                                 </Typography>
-                                <div className={classes.mainChartHeaderLabels}>
-                                    <div className={classes.mainChartHeaderLabel}>
-                                        <Dot color="warning"/>
-                                        <Typography className={classes.mainChartLegentElement}>Initial</Typography>
-                                    </div>
-                                    <div className={classes.mainChartHeaderLabel}>
-                                        <Dot color="primary"/>
-                                        <Typography className={classes.mainChartLegentElement}>Partial</Typography>
-                                    </div>
-                                    <div className={classes.mainChartHeaderLabel}>
-                                        <Dot color="success"/>
-                                        <Typography className={classes.mainChartLegentElement}>Final</Typography>
+                            </div>
+                            <Grid
+                                container
+                                direction="row"
+                                justify="space-between"
+                                alignItems="center"
+                            >
+                            </Grid>
+                        </ModelWidget>
+                    </Grid>
+                : null }
+
+                { ((props.model.status !== "WAITING") && (props.model.status !== "READY")) ?
+                    <Grid item xs={12}>
+                        <ModelWidget
+                            bodyClass={classes.mainChartBody}
+                            header={
+                                <div className={classes.mainChartHeader}>
+                                    <Typography variant="headline" color="textSecondary">
+                                        MSE Comparatives
+                                    </Typography>
+                                    <div className={classes.mainChartHeaderLabels}>
+                                        <div className={classes.mainChartHeaderLabel}>
+                                            <Dot color="warning"/>
+                                            <Typography className={classes.mainChartLegentElement}>Initial</Typography>
+                                        </div>
+                                        <div className={classes.mainChartHeaderLabel}>
+                                            <Dot color="primary"/>
+                                            <Typography className={classes.mainChartLegentElement}>Partial</Typography>
+                                        </div>
+                                        <div className={classes.mainChartHeaderLabel}>
+                                            <Dot color="success"/>
+                                            <Typography className={classes.mainChartLegentElement}>Final</Typography>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        }
-                    >
-                        <ResponsiveContainer width="100%" minWidth={500} height={350}>
-                            <ComposedChart
-                                margin={{top: 0, right: -15, left: -15, bottom: 0}}
-                                data={props.chart.data}
-                            >
-                                <YAxis
-                                    ticks={[0, 1000, 2000, 5000, 10000, 30000]}
-                                    tick={{fill: theme.palette.text.hint + '80', fontSize: 14}}
-                                    stroke={theme.palette.text.hint + '80'}
-                                    tickLine={false}
-                                />
-                                <XAxis
-                                    tickFormatter={i => i + 1}
-                                    tick={{fill: theme.palette.text.hint + '80', fontSize: 14}}
-                                    stroke={theme.palette.text.hint + '80'}
-                                    tickLine={false}
-                                />
-                                <Line
-                                    type="natural"
-                                    dataKey="initial"
-                                    fill={theme.palette.background.light}
-                                    strokeWidth={2}
-                                    dot={false}
-                                    activeDot={false}
-                                    strokeDasharray="5 5"
-                                />
-                                <Line
-                                    type="natural"
-                                    dataKey="partial"
-                                    stroke={theme.palette.primary.main}
-                                    strokeWidth={2}
-                                    dot={{
-                                        stroke: theme.palette.primary.main,
-                                        strokeWidth: 2,
-                                        fill: theme.palette.primary.main
-                                    }}
-                                    activeDot={false}
-                                />
-                                <Line
-                                    type="linear"
-                                    dataKey="final"
-                                    stroke={theme.palette.success.main}
-                                    strokeWidth={2}
-                                    strokeDasharray="5 5"
-                                    dot={false}
-                                />
-                            </ComposedChart>
-                        </ResponsiveContainer>
-                    </ModelWidget>
-                </Grid>
+                            }
+                        >
+                            <ResponsiveContainer width="100%" minWidth={500} height={350}>
+                                <ComposedChart
+                                    margin={{top: 0, right: -15, left: -15, bottom: 0}}
+                                    data={props.chart.data}
+                                >
+                                    <YAxis
+                                        ticks={[0, 1000, 2000, 5000, 10000, 30000]}
+                                        tick={{fill: theme.palette.text.hint + '80', fontSize: 14}}
+                                        stroke={theme.palette.text.hint + '80'}
+                                        tickLine={false}
+                                    />
+                                    <XAxis
+                                        tickFormatter={i => i + 1}
+                                        tick={{fill: theme.palette.text.hint + '80', fontSize: 14}}
+                                        stroke={theme.palette.text.hint + '80'}
+                                        tickLine={false}
+                                    />
+                                    <Line
+                                        type="natural"
+                                        dataKey="initial"
+                                        fill={theme.palette.background.light}
+                                        strokeWidth={2}
+                                        dot={false}
+                                        activeDot={false}
+                                        strokeDasharray="5 5"
+                                    />
+                                    <Line
+                                        type="natural"
+                                        dataKey="partial"
+                                        stroke={theme.palette.primary.main}
+                                        strokeWidth={2}
+                                        dot={{
+                                            stroke: theme.palette.primary.main,
+                                            strokeWidth: 2,
+                                            fill: theme.palette.primary.main
+                                        }}
+                                        activeDot={false}
+                                    />
+                                    <Line
+                                        type="linear"
+                                        dataKey="final"
+                                        stroke={theme.palette.success.main}
+                                        strokeWidth={2}
+                                        strokeDasharray="5 5"
+                                        dot={false}
+                                    />
+                                </ComposedChart>
+                            </ResponsiveContainer>
+                        </ModelWidget>
+                    </Grid>
+                : null }
             </Grid>
-
         </React.Fragment>
     );
 };

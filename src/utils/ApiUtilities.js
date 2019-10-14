@@ -33,6 +33,10 @@ export const post = async (url, requestData) => {
     return await executeJsonRequest("POST", url, requestData)
 };
 
+export const put = async (url, requestData) => {
+    return await executeJsonRequest("PUT", url, requestData)
+};
+
 export const get = async (url) => {
     return await executeJsonRequest("GET", url)
 };
