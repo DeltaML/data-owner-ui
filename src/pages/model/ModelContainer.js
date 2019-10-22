@@ -1,7 +1,8 @@
-import {compose, lifecycle, withState} from "recompose";
+import {compose, lifecycle, withHandlers, withState} from "recompose";
 import {connect} from "react-redux";
 import ModelView from "./Model";
-import {fetchingModelData} from "./ModelState";
+import {fetchingModelData, acceptModelTraining} from "./ModelState";
+import withRouter from "react-router/es/withRouter";
 
 
 export default compose(
@@ -12,8 +13,14 @@ export default compose(
             metrics: state.model.metrics,
             chart: state.model.chart
         }),
-        {fetchingModelData}
+        {fetchingModelData, acceptModelTraining}
     ),
+    withRouter,
+    withHandlers({
+        handleModelTraining: props => () => {
+            props.acceptModelTraining(props);
+        }
+    }),
     withState("mainChartState", "setMainChartState", "monthly"),
     lifecycle({
         componentWillMount() {

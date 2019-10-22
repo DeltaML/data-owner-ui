@@ -11,7 +11,7 @@ export const executeRequest = async (httpMethod, path, requestData, headers) => 
         headers: headers,
         body: requestData,
     };
-    const url = `${serverProtocol}://${serverDomain}:${serverPort}/${path}`;
+    const url = `/${path}`;
     const response = await fetch(url, settings);
     if (response.ok) {
         return await response.json()

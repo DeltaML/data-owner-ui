@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, HashRouter, Redirect, Route, Switch} from 'react-router-dom';
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 
 import themes, {overrides} from '../themes';
@@ -48,23 +48,18 @@ const PublicRoute = ({component, ...rest}) => {
 
 const App = () => (
     <MuiThemeProvider theme={theme}>
-        <BrowserRouter>
+        <HashRouter>
             <Switch>
                 <Route exact path="/" render={() => <Redirect to="/app/home"/>}/>
-                <Route exact path="/app" render={() => <Redirect to="/app/home"/>}/>
-                <Route exact path="/app/datasets" render={() => <Redirect to="/app/datasets"/>}/>
-                <Route exact path="/app/upload-dataset" render={() => <Redirect to="/app/upload-dataset"/>}/>
-                <Route exact path="/app/models" render={() => <Redirect to="/app/models"/>}/>
-                <Route exact path="/app/model" render={() => <Redirect to="/app/model"/>}/>
-                <PrivateRoute path="/app" component={Layout}/>
-                <PrivateRoute path="/app/upload-dataset" component={Layout}/>
-                <PrivateRoute path="/app/datasets" component={Layout}/>
-                <PrivateRoute path="/app/models" component={Layout}/>
-                <PrivateRoute path="/app/model" component={Layout}/>
+                <Route path="/app" component={Layout}/>
+                <Route path="/app/upload-dataset" component={Layout}/>
+                <Route path="/app/datasets" component={Layout}/>
+                <Route path="/app/models" component={Layout}/>
+                <Route path="/app/model" component={Layout}/>
                 <PublicRoute path="/login" component={Login}/>
                 <Route component={Error}/>
             </Switch>
-        </BrowserRouter>
+        </HashRouter>
     </MuiThemeProvider>
 );
 

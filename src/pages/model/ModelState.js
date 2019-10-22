@@ -88,7 +88,7 @@ export const fetchingModelData = (props) => async dispatch => {
 export const acceptModelTraining = (props) => async dispatch => {
     try {
         const modelId = props.location.pathname.split("/").pop();
-        const url = `models/${modelId}/accept`;
+        const url = `trainings/${modelId}/accept`;
         await put(url);
     } catch (e) {
         console.log(e);

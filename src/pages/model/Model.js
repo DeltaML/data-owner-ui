@@ -11,13 +11,14 @@ import {acceptModelTraining} from "./ModelState"
 
 const Model = ({classes, theme, ...props}) => {
     console.log("-------------- STATUS -----------");
+    console.log(props);
     console.log(props.model.status);
     return (
         <React.Fragment>
             {((props.model.status !== "WAITING") && (props.model.status !== "READY")) ?
                 <PageTitle title={props.model.name} disabled={false} modal="Show Model" modalData={props.model.weights}/>
                 :
-                <PageTitle title="Datasets" onClick={acceptModelTraining} disabled={props.model.status !== "READY"} button="Train model" buttonTo={"/app/model/" + props.model.id} />
+                <PageTitle title={props.model.name} onClick={props.handleModelTraining} disabled={props.model.status !== "READY"} button="Train model" buttonTo={"/app/model/" + props.model.id} />
             }
             <Grid container spacing={32}>
                 <Grid item lg={3} md={4} sm={6} xs={12}>
