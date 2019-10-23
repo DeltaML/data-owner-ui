@@ -1,4 +1,4 @@
-import {get} from "../../utils/ApiUtilities";
+import {get, put} from "../../utils/ApiUtilities";
 
 export const initialState = {
     isLoading: false,
@@ -49,11 +49,13 @@ export const dispatchModelDataSuccess = (dispatch, model) => {
     dispatch(fetchingModelDataField(FETCHING_MODEL_METRICS, model.metrics));
     dispatch(fetchingModelDataField(FETCHING_MODEL_CHART_DATA, getWeightsChartData(model.metrics)));
 
-}
+};
 
 
 export const getWeightsChartData = (metrics) => {
     const resultArray = [];
+    console.log(metrics.mse_history);
+    if (metrics.mse_history === null) return resultArray;
     for (let i = 0; i < metrics.mse_history.length; i++) {
         resultArray.push({
             partial: metrics.mse_history[i].mse,
@@ -75,9 +77,23 @@ export const fetchingModelData = (props) => async dispatch => {
         const modelData = await get(url);
         dispatchModelDataSuccess(dispatch, modelData);
     } catch (e) {
-        props.history.push(`/app/models`)
+        console.log(e);
+        props.history.push(`/app/models`);
         dispatch(fetchingModelDataError(e));
 
+    }
+};
+
+
+export const acceptModelTraining = (props) => async dispatch => {
+    try {
+        const modelId = props.location.pathname.split("/").pop();
+        const url = `trainings/${modelId}/accept`;
+        await put(url);
+    } catch (e) {
+        console.log(e);
+        props.history.push(`/app/models`);
+        dispatch(fetchingModelDataError(e));
     }
 };
 

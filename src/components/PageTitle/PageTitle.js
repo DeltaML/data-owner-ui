@@ -15,6 +15,8 @@ const PageTitle = ({classes, ...props}) => (
                 variant="contained"
                 size="large"
                 color="secondary"
+                disabled={props.disabled}
+                onClick={props.onClick}
                 component={Link} to={props.buttonTo}
             >
                 {props.button}

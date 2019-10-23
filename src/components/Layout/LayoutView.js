@@ -1,6 +1,6 @@
 import React from 'react';
 import {CssBaseline, withStyles} from '@material-ui/core';
-import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, HashRouter, Redirect, Route, Switch} from 'react-router-dom';
 import classnames from 'classnames';
 
 import Header from '../Header';
@@ -21,7 +21,7 @@ import Charts from '../../pages/charts';
 const Layout = ({classes, isSidebarOpened, toggleSidebar}) => (
     <div className={classes.root}>
         <CssBaseline/>
-        <BrowserRouter>
+        <HashRouter>
             <React.Fragment>
                 <Header/>
                 <Sidebar/>
@@ -43,7 +43,7 @@ const Layout = ({classes, isSidebarOpened, toggleSidebar}) => (
                     </Switch>
                 </div>
             </React.Fragment>
-        </BrowserRouter>
+        </HashRouter>
     </div>
 );
 
