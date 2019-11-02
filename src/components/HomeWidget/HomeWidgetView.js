@@ -1,8 +1,10 @@
 import React from "react";
 import classnames from "classnames";
-import {IconButton, Menu, MenuItem, Paper, withStyles} from "@material-ui/core";
+import {IconButton, Menu, MenuItem, Paper, Box, withStyles} from "@material-ui/core";
 import Typography from "@material-ui/core/es/Typography/Typography";
 import {MoreVert as MoreIcon} from "@material-ui/icons";
+import red from "@material-ui/core/colors/red";
+import { borders } from '@material-ui/system'
 
 const HomeWidget = ({
                         classes,
@@ -15,8 +17,8 @@ const HomeWidget = ({
                         link,
                         ...props
                     }) => (
-    <div className={classes.widgetWrapper}>
-        <Paper className={classes.paper} classes={{root: classes.widgetRoot}}>
+    <Box borderTop={3} borderColor="error.main" borderRadius="borderRadius" className={classes.widgetWrapper}>
+        <Paper className={classes.paper} onClick={() => props.editModel(link)} classes={{root: classes.widgetRoot}}>
             <div className={classes.widgetHeader}>
                 {props.header ? (
                     props.header
@@ -65,13 +67,14 @@ const HomeWidget = ({
             </MenuItem>
 
         </Menu>
-    </div>
+    </Box>
 );
 
 const styles = theme => ({
     widgetWrapper: {
         display: "flex",
-        minHeight: "100%"
+        minHeight: "100%",
+        cursor: "pointer"
     },
     widgetHeader: {
         padding: theme.spacing.unit * 3,
