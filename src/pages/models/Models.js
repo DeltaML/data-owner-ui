@@ -3,6 +3,7 @@ import {CircularProgress, Grid, withStyles,} from "@material-ui/core";
 import HomeWidget from "../../components/HomeWidget";
 import PageTitle from "../../components/PageTitle";
 import {Typography} from "../../components/Wrappers";
+import red from "@material-ui/core/colors/red";
 
 const Models = ({classes, theme, ...props}) => {
 
@@ -65,7 +66,8 @@ const styles = theme => ({
     card: {
         minHeight: "100%",
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
+        color: red
     },
     visitsNumberContainer: {
         display: "flex",

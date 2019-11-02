@@ -8,11 +8,18 @@ import Dot from "../../components/Sidebar/components/Dot";
 import BigStat from "./components/BigStat/BigStat";
 import PageTitle from "../../components/PageTitle";
 import {acceptModelTraining} from "./ModelState"
+import { JsonToTable } from "react-json-to-table";
+import TableReqsComponent from "./components/Table/TableReqs";
+import TableReqs2Component from "./components/Table/TableReqs2";
 
 const Model = ({classes, theme, ...props}) => {
     console.log("-------------- STATUS -----------");
     console.log(props);
     console.log(props.model.status);
+    if (props.model.requirements !== undefined) {
+        console.log(props.model.requirements.split('\'').join('"'));
+    }
+
     return (
         <React.Fragment>
             {((props.model.status !== "WAITING") && (props.model.status !== "READY")) ?
@@ -20,8 +27,8 @@ const Model = ({classes, theme, ...props}) => {
                 :
                 <PageTitle title={props.model.name} onClick={props.handleModelTraining} disabled={props.model.status !== "READY"} button="Train model" buttonTo={"/app/model/" + props.model.id} />
             }
-            <Grid container spacing={32}>
-                <Grid item lg={3} md={4} sm={6} xs={12}>
+            <Grid container spacing={2}>
+                <Grid item lg={3} md={4} sm={6} xs={12} spacing={2}>
                     <ModelWidget
                         title="Status"
                         upperTitle
@@ -44,14 +51,11 @@ const Model = ({classes, theme, ...props}) => {
                 </Grid>
 
                 { ((props.model.status !== "WAITING") && (props.model.status !== "READY")) ?
-                    <Grid item md={4} sm={6} xs={12}>
+                    <Grid item lg={3} md={4} sm={6} xs={12} spacing={2}>
                         <BigStat mse={props.metrics.mse} improvement={props.metrics.improvement}
                                  initialMse={props.metrics.initial_mse} iterations={props.metrics.iterations}/>
                     </Grid>
-                :
-                    <Grid item md={4} sm={6} xs={12}>
-                        {props.model.requirements}
-                    </Grid>
+                : null
                 }
 
                 { ((props.model.status !== "WAITING") && (props.model.status !== "READY")) ?
@@ -79,7 +83,7 @@ const Model = ({classes, theme, ...props}) => {
                 : null }
 
                 { ((props.model.status !== "WAITING") && (props.model.status !== "READY")) ?
-                    <Grid item xs={12}>
+                    <Grid item lg={12} md={12} sm={12} xs={12} spacing={2}>
                         <ModelWidget
                             bodyClass={classes.mainChartBody}
                             header={
@@ -154,7 +158,32 @@ const Model = ({classes, theme, ...props}) => {
                             </ResponsiveContainer>
                         </ModelWidget>
                     </Grid>
-                : null }
+                :
+                    <Grid item lg={12} md={12} sm={12} xs={12} >
+                        <ModelWidget className={classes.card}
+                                     title="Feature requirements"
+                                     upperTitle
+                                     bodyClass={classes.fullHeightBody}>
+                            <div>
+                                <TableReqsComponent rowsData={JSON.parse(props.model.requirements.split('\'').join('"'))} />
+                            </div>
+                        </ModelWidget>
+                    </Grid>
+                }
+
+                { ((props.model.status !== "WAITING") && (props.model.status !== "READY")) ?
+                    null :
+                    <Grid item lg={12} md={12} sm={12} xs={12} >
+                        <ModelWidget className={classes.card}
+                                     title="Target requirements"
+                                     upperTitle
+                                     bodyClass={classes.fullHeightBody}>
+                            <div>
+                                <TableReqs2Component rowsData={JSON.parse(props.model.requirements.split('\'').join('"'))} />
+                            </div>
+                        </ModelWidget>
+                    </Grid>
+                }
             </Grid>
         </React.Fragment>
     );
@@ -164,7 +193,9 @@ const styles = theme => ({
     card: {
         minHeight: "100%",
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
+        margin: theme.spacing.unit,
+        paddingBottom: theme.spacing.unit * 2
     },
     visitsNumberContainer: {
         display: "flex",
