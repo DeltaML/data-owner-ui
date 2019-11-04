@@ -56,6 +56,8 @@ const App = () => (
                 <Route path="/app/datasets" component={Layout}/>
                 <Route path="/app/models" component={Layout}/>
                 <Route path="/app/model" component={Layout}/>
+                <Route path="/app/profile" component={Layout}/>
+
                 <PublicRoute path="/login" component={Login}/>
                 <Route component={Error}/>
             </Switch>

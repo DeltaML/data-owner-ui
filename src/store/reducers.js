@@ -7,6 +7,7 @@ import uploadDataset from '../pages/uploadDataset/UploadDatasetState';
 import datasets from '../pages/datasets/DatasetsState';
 import models from '../pages/models/ModelsState';
 import model from '../pages/model/ModelState';
+import profile from '../pages/profile/ProfileState';
 
 export default combineReducers({
     layout,
@@ -15,5 +16,6 @@ export default combineReducers({
     datasets,
     uploadDataset,
     models,
-    model
+    model,
+    profile
 });
