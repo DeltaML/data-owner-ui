@@ -1,6 +1,6 @@
 import React from "react";
 import {Grid, withStyles,} from "@material-ui/core";
-import {ComposedChart, Line, ResponsiveContainer, XAxis, YAxis} from "recharts";
+import {LineChart, Tooltip, CartesianGrid, Line, ResponsiveContainer, XAxis, YAxis} from "recharts";
 
 import ModelWidget from "../../components/ModelWidget";
 import {Typography} from "../../components/Wrappers";
@@ -23,35 +23,41 @@ const Model = ({classes, theme, ...props}) => {
     return (
         <React.Fragment>
             {((props.model.status !== "WAITING") && (props.model.status !== "READY")) ?
-                <PageTitle title={props.model.name} disabled={false} modal="Show Model" modalData={props.model.weights}/>
-                :
+                null :
                 <PageTitle title={props.model.name} onClick={props.handleModelTraining} disabled={props.model.status !== "READY"} button="Train model" buttonTo={"/app/model/" + props.model.id} />
             }
             <Grid container spacing={2}>
-                <Grid item lg={3} md={4} sm={6} xs={12} spacing={2}>
+                <Grid item lg={3} md={4} sm={6} xs={12} >
                     <ModelWidget
                         title="Status"
                         upperTitle
                         bodyClass={classes.fullHeightBody}
                         className={classes.card}
                     >
-                        <div className={classes.visitsNumberContainer}>
-                            <Typography size="xl" weight="medium">
-                                {props.model.status}
-                            </Typography>
-                        </div>
                         <Grid
                             container
                             direction="row"
                             justify="space-between"
-                            alignItems="center"
-                        >
+                            alignItems="center">
+                            <Grid item>
+                                <Typography color="textSecondary">Status</Typography>
+                                <Typography size="md">{props.model.status}</Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography color="textSecondary">Creation Date</Typography>
+                                <Typography size="sm">{props.model.creation_date}</Typography>
+                            </Grid>
+
+                            <Grid item>
+                                <Typography color="textSecondary">Last Update Date</Typography>
+                                <Typography size="sm">{props.model.updated_date}</Typography>
+                            </Grid>
                         </Grid>
                     </ModelWidget>
                 </Grid>
 
                 { ((props.model.status !== "WAITING") && (props.model.status !== "READY")) ?
-                    <Grid item lg={3} md={4} sm={6} xs={12} spacing={2}>
+                    <Grid item lg={4} md={4} sm={6} xs={12}>
                         <BigStat mse={props.metrics.mse} improvement={props.metrics.improvement}
                                  initialMse={props.metrics.initial_mse} iterations={props.metrics.iterations}/>
                     </Grid>
@@ -61,29 +67,35 @@ const Model = ({classes, theme, ...props}) => {
                 { ((props.model.status !== "WAITING") && (props.model.status !== "READY")) ?
                     <Grid item lg={3} md={4} sm={6} xs={12}>
                         <ModelWidget
-                            title="Spent Money"
+                            title="Earnings"
                             upperTitle
                             bodyClass={classes.fullHeightBody}
                             className={classes.card}
                         >
-                            <div className={classes.visitsNumberContainer}>
-                                <Typography size="xl" weight="medium">
-                                    $10/$100
-                                </Typography>
-                            </div>
                             <Grid
                                 container
                                 direction="row"
                                 justify="space-between"
                                 alignItems="center"
+                                className={classes.visitsNumberContainer}
                             >
+                                <Grid item className={classes.visitsNumberContainer}>
+                                    <Typography size="xl" weight="medium">
+                                        Max. possible: {5 * 0.7 } eth
+                                    </Typography>
+                                </Grid>
+                                <Grid item className={classes.visitsNumberContainer}>
+                                    <Typography size="xl" weight="medium">
+                                        Total: {props.model.earned} eth
+                                    </Typography>
+                                </Grid>
                             </Grid>
                         </ModelWidget>
                     </Grid>
                 : null }
 
                 { ((props.model.status !== "WAITING") && (props.model.status !== "READY")) ?
-                    <Grid item lg={12} md={12} sm={12} xs={12} spacing={2}>
+                    <Grid item xs={12}>
                         <ModelWidget
                             bodyClass={classes.mainChartBody}
                             header={
@@ -109,22 +121,19 @@ const Model = ({classes, theme, ...props}) => {
                             }
                         >
                             <ResponsiveContainer width="100%" minWidth={500} height={350}>
-                                <ComposedChart
-                                    margin={{top: 0, right: -15, left: -15, bottom: 0}}
+                                <LineChart
+                                    margin={{top: 0, right: 10, left: 10, bottom: 0}}
                                     data={props.chart.data}
                                 >
+                                    <CartesianGrid strokeDasharray="3 3" />
                                     <YAxis
-                                        ticks={[0, 1000, 2000, 5000, 10000, 30000]}
-                                        tick={{fill: theme.palette.text.hint + '80', fontSize: 14}}
-                                        stroke={theme.palette.text.hint + '80'}
-                                        tickLine={false}
+                                        scale='log'
+                                        domain={['auto', 'dataMax + 1000']}
                                     />
                                     <XAxis
                                         tickFormatter={i => i + 1}
-                                        tick={{fill: theme.palette.text.hint + '80', fontSize: 14}}
-                                        stroke={theme.palette.text.hint + '80'}
-                                        tickLine={false}
                                     />
+                                    <Tooltip />
                                     <Line
                                         type="natural"
                                         dataKey="initial"
@@ -135,16 +144,15 @@ const Model = ({classes, theme, ...props}) => {
                                         strokeDasharray="5 5"
                                     />
                                     <Line
-                                        type="natural"
+                                        type="monotone"
                                         dataKey="partial"
                                         stroke={theme.palette.primary.main}
-                                        strokeWidth={2}
+                                        strokeWidth={1}
                                         dot={{
                                             stroke: theme.palette.primary.main,
-                                            strokeWidth: 2,
-                                            fill: theme.palette.primary.main
+                                            strokeWidth: 1,
                                         }}
-                                        activeDot={false}
+                                        activeDot={{ r: 8 }}
                                     />
                                     <Line
                                         type="linear"
@@ -154,7 +162,7 @@ const Model = ({classes, theme, ...props}) => {
                                         strokeDasharray="5 5"
                                         dot={false}
                                     />
-                                </ComposedChart>
+                                </LineChart>
                             </ResponsiveContainer>
                         </ModelWidget>
                     </Grid>

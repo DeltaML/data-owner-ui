@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {Grid, withStyles} from "@material-ui/core";
 import classnames from "classnames";
-
+import { ArrowUpward as ArrowUpwardIcon , ArrowDownward as ArrowDownwardIcon} from "@material-ui/icons";
 import Widget from "../../../../components/Widget";
 import {Typography} from "../../../../components/Wrappers";
 
@@ -35,9 +35,10 @@ class BigStat extends PureComponent {
                 <div className={classes.totalValueContainer}>
                     <div className={classes.totalValue}>
                         <Typography size="xxl" color={improvement > 0 ? "success" : "secondary"}>
-                            &nbsp;{improvement > 0 ? "+" : "-"}
-                            {improvement}%
+                            {improvement > 0 ? <ArrowUpwardIcon/>: <ArrowDownwardIcon/>}
+                            {improvement}% <Typography size="sm" color="textSecondary"> Improvement </Typography>
                         </Typography>
+
                     </div>
 
                 </div>
