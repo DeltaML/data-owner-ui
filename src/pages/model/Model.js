@@ -11,6 +11,7 @@ import {acceptModelTraining} from "./ModelState"
 import { JsonToTable } from "react-json-to-table";
 import TableReqsComponent from "./components/Table/TableReqs";
 import TableReqs2Component from "./components/Table/TableReqs2";
+import Widget from "../../components/Widget";
 
 const Model = ({classes, theme, ...props}) => {
     console.log("-------------- STATUS -----------");
@@ -27,18 +28,24 @@ const Model = ({classes, theme, ...props}) => {
                 <PageTitle title={props.model.name} onClick={props.handleModelTraining} disabled={props.model.status !== "READY"} button="Train model" buttonTo={"/app/model/" + props.model.id} />
             }
             <Grid container spacing={2}>
-                <Grid item lg={3} md={4} sm={6} xs={12} >
+                <Grid item lg={4} md={4} sm={6} xs={12} >
                     <ModelWidget
-                        title="Status"
+                        header={
+                            <div className={classes.title}>
+                                <Typography variant="h5">Status</Typography>
+                            </div>
+                        }
                         upperTitle
                         bodyClass={classes.fullHeightBody}
                         className={classes.card}
                     >
                         <Grid
                             container
-                            direction="row"
+                            direction="column"
                             justify="space-between"
-                            alignItems="center">
+                            alignItems="flex-start"
+                            className={classes.fullHeightBody}
+                        >
                             <Grid item>
                                 <Typography color="textSecondary">Status</Typography>
                                 <Typography size="md">{props.model.status}</Typography>
@@ -65,30 +72,42 @@ const Model = ({classes, theme, ...props}) => {
                 }
 
                 { ((props.model.status !== "WAITING") && (props.model.status !== "READY")) ?
-                    <Grid item lg={3} md={4} sm={6} xs={12}>
+                    <Grid item lg={4} md={4} sm={6} xs={12}>
                         <ModelWidget
-                            title="Earnings"
+                            header={
+                                <div className={classes.title}>
+                                    <Typography variant="h5">Earnings</Typography>
+                                </div>
+                            }
                             upperTitle
                             bodyClass={classes.fullHeightBody}
                             className={classes.card}
                         >
                             <Grid
                                 container
-                                direction="row"
-                                justify="space-between"
-                                alignItems="center"
-                                className={classes.visitsNumberContainer}
+                                direction="column"
+                                justify="space-evenly"
+                                alignItems="flex-start"
+                                className={classes.earnings}
                             >
-                                <Grid item className={classes.visitsNumberContainer}>
+                                <Grid item>
                                     <Typography size="xl" weight="medium">
                                         Max. possible: {5 * 0.7 } eth
                                     </Typography>
                                 </Grid>
-                                <Grid item className={classes.visitsNumberContainer}>
-                                    <Typography size="xl" weight="medium">
-                                        Total: {props.model.earned} eth
-                                    </Typography>
-                                </Grid>
+                                {(props.model.status === "FINISHED") ?
+                                    <Grid item>
+                                        < Typography size="xl" weight="medium">
+                                            Total: {props.model.earned} eth
+                                        </Typography>
+                                    </Grid>
+                                :
+                                    <Grid item>
+                                        <Typography size="xl" weight="medium">
+                                            Total: Calculating...
+                                        </Typography>
+                                    </Grid>
+                                }
                             </Grid>
                         </ModelWidget>
                     </Grid>
@@ -208,6 +227,11 @@ const styles = theme => ({
     visitsNumberContainer: {
         display: "flex",
         alignItems: "center",
+        flexGrow: 1,
+        paddingBottom: theme.spacing.unit
+    },
+    earnings: {
+        display: "flex",
         flexGrow: 1,
         paddingBottom: theme.spacing.unit
     },
