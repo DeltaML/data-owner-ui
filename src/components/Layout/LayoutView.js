@@ -11,12 +11,7 @@ import Datasets from '../../pages/datasets';
 import UploadDataset from '../../pages/uploadDataset';
 import Models from '../../pages/models';
 import Model from '../../pages/model';
-import Typography from '../../pages/typography';
-import Notifications from '../../pages/notifications';
-import Maps from '../../pages/maps';
-import Tables from '../../pages/tables';
-import Icons from '../../pages/icons';
-import Charts from '../../pages/charts';
+import Profile from '../../pages/profile';
 
 const Layout = ({classes, isSidebarOpened, toggleSidebar}) => (
     <div className={classes.root}>
@@ -33,13 +28,7 @@ const Layout = ({classes, isSidebarOpened, toggleSidebar}) => (
                         <Route path="/app/upload-dataset" component={UploadDataset}/>
                         <Route path="/app/models" component={Models}/>
                         <Route path="/app/model" component={Model}/>
-                        <Route path="/app/typography" component={Typography}/>
-                        <Route path="/app/tables" component={Tables}/>
-                        <Route path="/app/notifications" component={Notifications}/>
-                        <Route exact path="/app/ui" render={() => <Redirect to="/app/ui/icons"/>}/>
-                        <Route path="/app/ui/maps" component={Maps}/>
-                        <Route path="/app/ui/icons" component={Icons}/>
-                        <Route path="/app/ui/charts" component={Charts}/>
+                        <Route path="/app/profile" component={Profile} />
                     </Switch>
                 </div>
             </React.Fragment>

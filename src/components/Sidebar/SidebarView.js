@@ -17,8 +17,7 @@ const structure = [
     {id: 0, label: 'Home', link: '/app/home', icon: <HomeIcon/>},
     {id: 1, label: 'Datasets', link: '/app/datasets', icon: <LibraryIcon/>},
     {id: 2, label: 'Upload Dataset', link: '/app/upload-dataset', icon: <AttachmentIcon/>},
-    {id: 3, label: 'Models', link: '/app/models', icon: <BookmarksIcon/>},
-    {id: 4, label: 'Model', link: '/app/model', icon: <BookmarkIcon/>}
+    {id: 3, label: 'Models', link: '/app/models', icon: <BookmarksIcon/>}
 ];
 
 const SidebarView = ({classes, theme, toggleSidebar, isSidebarOpened, isPermanent, location}) => {
