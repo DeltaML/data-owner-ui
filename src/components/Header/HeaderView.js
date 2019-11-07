@@ -43,7 +43,7 @@ const Header = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
             classes={{
               root: classNames(classes.headerIcon, classes.headerIconCollapse)
             }}
-          />        console.log("Redirect to profile page")
+          />
 
         ) : (
           <MenuIcon
