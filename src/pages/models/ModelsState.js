@@ -29,9 +29,19 @@ export const fetchingModelsDataError = (error) => ({
 export const fetchingModelsData = (props) => async dispatch => {
 
     dispatch(fetchingModelsDataPending());
-
+    let colorMap = {
+        "WAITING": "error.main",
+        "INITIATED": "primary.main",
+        "IN_PRGRESS": "primary.main",
+        "FINISHED": "grey.500"
+    };
     try {
-        const models = await get("models");
+        let models = await get("models");
+        models = models.map(model => {
+            model.status_color = colorMap[model.status];
+            model.improvement = (model.improvement * 100).toFixed(2);
+            return model;
+        });
         dispatch(fetchingModelsDataSuccess(models));
     } catch (e) {
         props.history.push(`/login`)

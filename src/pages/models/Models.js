@@ -23,6 +23,7 @@ const Models = ({classes, theme, ...props}) => {
                                     bodyClass={classes.fullHeightBody}
                                     className={classes.card}
                                     link={model.id}
+                                    bColor={model.status_color}
                                 >
                                     <div className={classes.visitsNumberContainer}>
                                         <Typography size="xl" weight="medium">
@@ -44,11 +45,6 @@ const Models = ({classes, theme, ...props}) => {
                                             <Typography color="textSecondary">Iterations</Typography>
                                             <Typography size="md">{model.iterations}</Typography>
                                         </Grid>
-                                        <Grid item>
-                                            <Typography color="textSecondary">Cost</Typography>
-                                            <Typography size="md">${model.cost}</Typography>
-                                        </Grid>
-
                                     </Grid>
                                 </HomeWidget>
                             </Grid>

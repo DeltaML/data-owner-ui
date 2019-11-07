@@ -12,6 +12,7 @@ import { JsonToTable } from "react-json-to-table";
 import TableReqsComponent from "./components/Table/TableReqs";
 import TableReqs2Component from "./components/Table/TableReqs2";
 import Widget from "../../components/Widget";
+import Moment from 'react-moment';
 
 const Model = ({classes, theme, ...props}) => {
     console.log("-------------- STATUS -----------");
@@ -52,12 +53,20 @@ const Model = ({classes, theme, ...props}) => {
                             </Grid>
                             <Grid item>
                                 <Typography color="textSecondary">Creation Date</Typography>
-                                <Typography size="sm">{props.model.creation_date}</Typography>
+                                <Typography size="sm">
+                                    <Moment format="YYYY/MM/DD HH:mm">
+                                        {props.model.creation_date}
+                                    </Moment>
+                                </Typography>
                             </Grid>
 
                             <Grid item>
                                 <Typography color="textSecondary">Last Update Date</Typography>
-                                <Typography size="sm">{props.model.updated_date}</Typography>
+                                <Typography size="sm">
+                                    <Moment format="YYYY/MM/DD HH:mm">
+                                        {props.model.updated_date}
+                                    </Moment>
+                                </Typography>
                             </Grid>
                         </Grid>
                     </ModelWidget>
@@ -98,7 +107,7 @@ const Model = ({classes, theme, ...props}) => {
                                 {(props.model.status === "FINISHED") ?
                                     <Grid item>
                                         < Typography size="xl" weight="medium">
-                                            Total: {props.model.earned} eth
+                                            Total: {props.metrics.earned} eth
                                         </Typography>
                                     </Grid>
                                 :

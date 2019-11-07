@@ -15,9 +15,10 @@ const HomeWidget = ({
                         className,
                         disableWidgetMenu,
                         link,
+                        bColor,
                         ...props
                     }) => (
-    <Box borderTop={3} borderColor="error.main" borderRadius="borderRadius" className={classes.widgetWrapper}>
+    <Box borderTop={3} borderColor={bColor} borderRadius="borderRadius" className={classes.widgetWrapper}>
         <Paper className={classes.paper} onClick={() => props.editModel(link)} classes={{root: classes.widgetRoot}}>
             <div className={classes.widgetHeader}>
                 {props.header ? (
