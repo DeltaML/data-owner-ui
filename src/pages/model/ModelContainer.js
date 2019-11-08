@@ -23,7 +23,19 @@ export default compose(
     }),
     withState("mainChartState", "setMainChartState", "monthly"),
     lifecycle({
+        componentDidMount() {
+            this.timerID = setInterval(
+                () => this.tick(),
+                5000
+            );
+        },
         componentWillMount() {
+            this.props.fetchingModelData(this.props)
+        },
+        componentWillUnmount() {
+            clearInterval(this.timerID);
+        },
+        tick() {
             this.props.fetchingModelData(this.props)
         }
     })
