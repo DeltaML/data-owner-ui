@@ -6,9 +6,12 @@ export const initialState = {
     data: null,
     model: {
         status: null,
+        creation_date: null,
+        updated_date: null,
         id: null,
         weights: null,
-        type: null
+        type: null,
+        earned: 0.0
     },
     metrics: {
         iterations: null,
@@ -66,21 +69,24 @@ export const getWeightsChartData = (metrics) => {
     return resultArray;
 };
 
+export const transformModelData = (data) => {
+    data.metrics.improvement = (data.metrics.improvement * 100).toFixed(2);
+    data.metrics.mse = (data.metrics.mse).toFixed(2);
+    return data
+};
+
 export const fetchingModelData = (props) => async dispatch => {
-
     dispatch(fetchingModelDataPending());
-
     try {
-
         const modelId = props.location.pathname.split("/").pop()
         const url = `models/${modelId}`;
         const modelData = await get(url);
-        dispatchModelDataSuccess(dispatch, modelData);
+        const transformedModelData = transformModelData(modelData);
+        dispatchModelDataSuccess(dispatch, transformedModelData);
     } catch (e) {
         console.log(e);
         props.history.push(`/app/models`);
         dispatch(fetchingModelDataError(e));
-
     }
 };
 

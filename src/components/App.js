@@ -50,7 +50,7 @@ const App = () => (
     <MuiThemeProvider theme={theme}>
         <HashRouter>
             <Switch>
-                <Route exact path="/" render={() => <Redirect to="/app/home"/>}/>
+                <Route exact path="/" render={() => <Redirect to="/login"/>}/>
                 <Route path="/app" component={Layout}/>
                 <Route path="/app/upload-dataset" component={Layout}/>
                 <Route path="/app/datasets" component={Layout}/>

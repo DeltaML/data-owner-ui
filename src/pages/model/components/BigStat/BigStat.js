@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {Grid, withStyles} from "@material-ui/core";
 import classnames from "classnames";
-
+import { ArrowUpward as ArrowUpwardIcon , ArrowDownward as ArrowDownwardIcon} from "@material-ui/icons";
 import Widget from "../../../../components/Widget";
 import {Typography} from "../../../../components/Wrappers";
 
@@ -32,56 +32,54 @@ class BigStat extends PureComponent {
                 }
                 upperTitle
             >
-                <div className={classes.totalValueContainer}>
-                    <div className={classes.totalValue}>
-                        <Typography size="xxl" color={improvement > 0 ? "success" : "secondary"}>
-                            &nbsp;{improvement > 0 ? "+" : "-"}
-                            {improvement}%
-                        </Typography>
-                    </div>
+                <Grid
+                    container
+                    direction="row"
+                    justify="space-between"
+                    alignItems="center"
+                >
+                    <div className={classes.totalValueContainer}>
+                        <div className={classes.totalValue}>
+                            <Typography size="xxl" color={improvement > 0 ? "success" : "secondary"}>
+                                {improvement > 0 ? <ArrowUpwardIcon/>: <ArrowDownwardIcon/>}
+                                {improvement}% <Typography size="sm" color="textSecondary"> Improvement </Typography>
+                            </Typography>
 
-                </div>
-                <div className={classes.bottomStatsContainer}>
-                    <div className={classnames(classes.statCell, classes.borderRight)}>
-                        <Grid container alignItems="center">
-                            <Typography variant="h6">{initialMse}</Typography>
-                            {/*<ArrowForwardIcon
-                className={classnames(classes.profitArrow, {
-                  [!registrations[value].profit]: classes.profitArrowDanger
-                })}
-              />*/}
-                        </Grid>
-                        <Typography size="sm" color="textSecondary">
-                            Initial MSE
-                        </Typography>
+                        </div>
+
                     </div>
-                    <div className={classes.statCell}>
-                        <Grid container alignItems="center">
-                            <Typography variant="h6">{mse}</Typography>
-                            {/*<ArrowForwardIcon
-                className={classnames(classes.profitArrow, {
-                  [!registrations[value].profit]: classes.profitArrowDanger
-                })}
-              />*/}
+                    <Grid
+                        container
+                        direction="row"
+                        justify="space-between"
+                        className={classes.bottomStatsContainer}>
+                        <Grid item className={classnames(classes.statCell, classes.borderRight)}>
+                            <Grid container alignItems="center">
+                                <Typography variant="h6">{initialMse}</Typography>
+                            </Grid>
+                            <Typography size="sm" color="textSecondary">
+                                Initial MSE
+                            </Typography>
                         </Grid>
-                        <Typography size="sm" color="textSecondary">
-                            MSE
-                        </Typography>
-                    </div>
-                    <div className={classes.statCell}>
-                        <Grid container alignItems="center">
-                            <Typography variant="h6">#{iterations}</Typography>
-                            {/*<ArrowForwardIcon
-                className={classnames(classes.profitArrow, {
-                  [!registrations[value].profit]: classes.profitArrowDanger
-                })}
-              />*/}
+                        <Grid item className={classes.statCell}>
+                            <Grid container alignItems="center">
+                                <Typography variant="h6">{mse}</Typography>
+
+                            </Grid>
+                            <Typography size="sm" color="textSecondary">
+                                MSE
+                            </Typography>
                         </Grid>
-                        <Typography size="sm" color="textSecondary">
-                            Iterations
-                        </Typography>
-                    </div>
-                </div>
+                        <Grid item className={classes.statCell}>
+                            <Grid container alignItems="center">
+                                <Typography variant="h6">#{iterations}</Typography>
+                            </Grid>
+                            <Typography size="sm" color="textSecondary">
+                                Iterations
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                </Grid>
             </Widget>
         );
     }

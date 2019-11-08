@@ -3,6 +3,7 @@ import {CircularProgress, Grid, withStyles,} from "@material-ui/core";
 import HomeWidget from "../../components/HomeWidget";
 import PageTitle from "../../components/PageTitle";
 import {Typography} from "../../components/Wrappers";
+import red from "@material-ui/core/colors/red";
 
 const Models = ({classes, theme, ...props}) => {
 
@@ -22,6 +23,7 @@ const Models = ({classes, theme, ...props}) => {
                                     bodyClass={classes.fullHeightBody}
                                     className={classes.card}
                                     link={model.id}
+                                    bColor={model.status_color}
                                 >
                                     <div className={classes.visitsNumberContainer}>
                                         <Typography size="xl" weight="medium">
@@ -43,11 +45,6 @@ const Models = ({classes, theme, ...props}) => {
                                             <Typography color="textSecondary">Iterations</Typography>
                                             <Typography size="md">{model.iterations}</Typography>
                                         </Grid>
-                                        <Grid item>
-                                            <Typography color="textSecondary">Cost</Typography>
-                                            <Typography size="md">${model.cost}</Typography>
-                                        </Grid>
-
                                     </Grid>
                                 </HomeWidget>
                             </Grid>
@@ -65,7 +62,8 @@ const styles = theme => ({
     card: {
         minHeight: "100%",
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
+        color: red
     },
     visitsNumberContainer: {
         display: "flex",
