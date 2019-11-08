@@ -1,5 +1,6 @@
 import {get} from "../../utils/ApiUtilities";
 
+
 export const initialState = {
     isLoading: false,
     error: null,
