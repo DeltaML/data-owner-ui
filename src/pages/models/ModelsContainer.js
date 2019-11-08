@@ -17,7 +17,19 @@ export default compose(
     withState("mainChartState", "setMainChartState", "monthly"),
 
     lifecycle({
+        componentDidMount() {
+            this.timerID = setInterval(
+                () => this.tick(),
+                5000
+            );
+        },
         componentWillMount() {
+            this.props.fetchingModelsData(this.props)
+        },
+        componentWillUnmount() {
+            clearInterval(this.timerID);
+        },
+        tick() {
             this.props.fetchingModelsData(this.props)
         }
     }),

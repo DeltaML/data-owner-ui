@@ -11,7 +11,7 @@ const Models = ({classes, theme, ...props}) => {
 
         <React.Fragment>
             <PageTitle title="Models"/>
-            <Grid container spacing={32}>
+            <Grid container spacing={2}>
                 {props.isLoading ? (
                     <CircularProgress size={26}/>
                 ) : (
