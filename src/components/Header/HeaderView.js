@@ -53,7 +53,7 @@ const Header = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
           />
         )}
       </IconButton>
-      <Typography variant="h6" weight="medium" className={classes.logotype}>Model Buyer</Typography>
+      <Typography variant="h6" weight="medium" className={classes.logotype}>Data Owner</Typography>
       <div className={classes.grow} />
 
       <IconButton
